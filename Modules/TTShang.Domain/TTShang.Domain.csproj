@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Furion" Version="4.9.7.216" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\TTShang.Domain.Shared\TTShang.Domain.Shared.csproj" />
   </ItemGroup>
 

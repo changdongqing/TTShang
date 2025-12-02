@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Furion" Version="4.9.7.216" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
   </ItemGroup>
 
   <ItemGroup>

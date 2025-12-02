@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/Modules/">
+    <Project Path="Modules/TTShang.Application.Contracts/TTShang.Application.Contracts.csproj" Id="f306a95c-6e41-4d86-9568-aa4ccd8d7180" />
+    <Project Path="Modules/TTShang.Application/TTShang.Application.csproj" Id="fdc5f6ab-847c-4d59-89d4-352ac2df53f5" />
+    <Project Path="Modules/TTShang.Domain/TTShang.Domain.csproj" Id="663418ca-0cc5-412c-b1e4-4d8bd46460c9" />
+    <Project Path="Modules/TTShang.HttpApi/TTShang.HttpApi.csproj" Id="c9f62033-caec-47cf-82c6-e8e09309f350" />
+    <Project Path="Modules/TTShang.Domain.Shared/TTShang.Domain.Shared.csproj" Id="40068975-b6f9-46b0-80d3-4027e4312f6f" />
+    <Project Path="Modules/TTShang.SqlSugar/TTShang.SqlSugar.csproj" Id="e7c0c1a6-9dc2-4f0b-8dbb-b09075906b73" />
+  </Folder>
+  <Folder Name="/Modules/TTShang.YouMing/" />
+  <Folder Name="/TTShang.Web/" />
+  <Folder Name="/TTShang.Web/TTShang.Blazor/">
+    <Project Path="TTShang.Web/TTShang.Blazor/TTShang.Blazor.Client/TTShang.Blazor.Client.csproj" />
+    <Project Path="TTShang.Web/TTShang.Blazor/TTShang.Blazor/TTShang.Blazor.csproj" />
+  </Folder>
+</Solution>

@@ -38,7 +38,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../../modules/Volo.Abp.LeptonXLiteTheme/src/Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme/Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme.csproj" />
-    <ProjectReference Include="../../modules/Volo.Abp.LeptonXLiteTheme/src/Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite/Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Studio.Client.AspNetCore" Version="2.1.3" />

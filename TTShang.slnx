@@ -3,7 +3,6 @@
     <Folder Name="/modules/Volo.Abp.LeptonXLiteTheme/">
         <Project Path="modules/Volo.Abp.LeptonXLiteTheme/src/Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme/Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme.csproj" />
         <Project Path="modules/Volo.Abp.LeptonXLiteTheme/src/Volo.Abp.AspNetCore.Components.Web.LeptonXLiteTheme/Volo.Abp.AspNetCore.Components.Web.LeptonXLiteTheme.csproj" />
-        <Project Path="modules/Volo.Abp.LeptonXLiteTheme/src/Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite/Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite.csproj" />
     </Folder>
     <Folder Name="/src/">
         <Project Path="src/TTShang.Domain/TTShang.Domain.csproj" />

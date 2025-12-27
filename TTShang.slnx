@@ -1,7 +1,4 @@
 <Solution>
-    <Configurations>
-        <Platform Name="Any CPU" />
-    </Configurations>
     <Folder Name="/src/">
         <Project Path="src/TTShang.Domain/TTShang.Domain.csproj" />
         <Project Path="src/TTShang.Application/TTShang.Application.csproj" />
@@ -12,12 +9,5 @@
         <Project Path="src/TTShang.HttpApi.Client/TTShang.HttpApi.Client.csproj" />
         <Project Path="src/TTShang.DbMigrator/TTShang.DbMigrator.csproj" />
         <Project Path="src/TTShang.Blazor/TTShang.Blazor.csproj" />
-    </Folder>
-    <Folder Name="/test/">
-        <Project Path="test/TTShang.Application.Tests/TTShang.Application.Tests.csproj" />
-        <Project Path="test/TTShang.EntityFrameworkCore.Tests/TTShang.EntityFrameworkCore.Tests.csproj" />
-        <Project Path="test/TTShang.TestBase/TTShang.TestBase.csproj" />
-        <Project Path="test/TTShang.Domain.Tests/TTShang.Domain.Tests.csproj" />
-        <Project Path="test/TTShang.HttpApi.Client.ConsoleTestApp/TTShang.HttpApi.Client.ConsoleTestApp.csproj" />
     </Folder>
 </Solution>

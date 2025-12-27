@@ -10,6 +10,9 @@
   "modules": {
     "TTShang": {
       "path": "TTShang.abpmdl"
+    },
+    "Volo.Abp.LeptonXLiteTheme": {
+      "path": "modules/Volo.Abp.LeptonXLiteTheme/Volo.Abp.LeptonXLiteTheme.abpmdl"
     }
   },
   "runProfiles": {
@@ -19,9 +22,7 @@
   },
   "options": {
     "httpRequests": {
-      "ignoredUrls": [
-      
-      ]
+      "ignoredUrls": []
     }
   },
   "creatingStudioConfiguration": {
@@ -45,11 +46,31 @@
     "theme": "leptonx-lite",
     "themeStyle": "",
     "themeMenuPlacement": "",
-    "mobileFramework": "none",
     "publicWebsite": "false",
     "socialLogin": "true",
     "sampleCrudPage": "true",
-    "selectedLanguages": ["English", "Arabic", "Chinese (Simplified)", "Chinese (Traditional)", "Czech", "English (United Kingdom)", "Finnish", "French", "German (Germany)", "Hindi ", "Hungarian", "Icelandic", "Italian", "Portuguese (Brazil)", "Romanian (Romania)", "Russian", "Slovak", "Spanish", "Swedish", "Turkish", ],
+    "selectedLanguages": [
+      "English",
+      "Arabic",
+      "Chinese (Simplified)",
+      "Chinese (Traditional)",
+      "Czech",
+      "English (United Kingdom)",
+      "Finnish",
+      "French",
+      "German (Germany)",
+      "Hindi ",
+      "Hungarian",
+      "Icelandic",
+      "Italian",
+      "Portuguese (Brazil)",
+      "Romanian (Romania)",
+      "Russian",
+      "Slovak",
+      "Spanish",
+      "Swedish",
+      "Turkish"
+    ],
     "defaultLanguage": "English",
     "createCommand": "abp new TTShang -t app --ui-framework blazor-server --database-provider ef --database-management-system postgresql --theme leptonx-lite --skip-migration  --skip-migrator  --without-cms-kit --sample-crud-page --dont-run-bundling -no-file-management"
   }

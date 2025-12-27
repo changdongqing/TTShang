@@ -2,9 +2,9 @@
   "template": "app",
   "imports": {
     "Volo.Abp.LeptonXLiteTheme": {
-      "version": "5.0.1",
       "isInstalled": true,
-      "creationTime": "12/27/2025 12:09:43 +00:00"
+      "creationTime": "12/27/2025 12:09:43 +00:00",
+      "path": "modules/Volo.Abp.LeptonXLiteTheme/Volo.Abp.LeptonXLiteTheme.abpmdl"
     },
     "Volo.Abp.Account": {
       "version": "10.0.1",

@@ -1,5 +1,10 @@
 <Solution>
     <Folder Name="/modules/" />
+    <Folder Name="/modules/TTShang.Abp.AntdesignBlazorTheme/">
+        <Project Path="modules/TTShang.Abp.AntdesignBlazorTheme/TTShang.Abp.AntDesignUI/TTShang.Abp.AntDesignUI.csproj" />
+        <Project Path="modules/TTShang.Abp.AntdesignBlazorTheme/TTShang.Abp.AspnetCore.Components.Server.AntDesignTheme/TTShang.Abp.AspnetCore.Components.Server.AntDesignTheme.csproj" />
+        <Project Path="modules/TTShang.Abp.AntdesignBlazorTheme/TTShang.Abp.AspnetCore.Components.Web.AntDesignTheme/TTShang.Abp.AspnetCore.Components.Web.AntDesignTheme.csproj" />
+    </Folder>
     <Folder Name="/modules/Volo.Abp.LeptonXLiteTheme/">
         <Project Path="modules/Volo.Abp.LeptonXLiteTheme/src/Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme/Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme.csproj" />
         <Project Path="modules/Volo.Abp.LeptonXLiteTheme/src/Volo.Abp.AspNetCore.Components.Web.LeptonXLiteTheme/Volo.Abp.AspNetCore.Components.Web.LeptonXLiteTheme.csproj" />

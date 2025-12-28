@@ -33,8 +33,7 @@ using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.AspNetCore.Components.Server;
 using Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme;
 using Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme.Bundling;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite.Bundling;
+
 using Volo.Abp.Identity;
 using Volo.Abp.Autofac;
 using Volo.Abp.Mapperly;
@@ -66,7 +65,6 @@ namespace TTShang.Blazor;
     typeof(AbpTenantManagementBlazorServerModule),
     typeof(AbpAccountWebOpenIddictModule),
     typeof(AbpAspNetCoreComponentsServerLeptonXLiteThemeModule),
-    typeof(AbpAspNetCoreMvcUiLeptonXLiteThemeModule),
     typeof(AbpAspNetCoreSerilogModule),
     typeof(AbpFeatureManagementBlazorServerModule),
     typeof(AbpSettingManagementBlazorServerModule)
@@ -182,22 +180,22 @@ public class TTShangBlazorModule : AbpModule
     {
         Configure<AbpBundlingOptions>(options =>
         {
-            // MVC UI
-            options.StyleBundles.Configure(
-                LeptonXLiteThemeBundles.Styles.Global,
-                bundle =>
-                {
-                    bundle.AddFiles("/global-styles.css");
-                }
-            );
+            //// MVC UI
+            //options.StyleBundles.Configure(
+            //    LeptonXLiteThemeBundles.Styles.Global,
+            //    bundle =>
+            //    {
+            //        bundle.AddFiles("/global-styles.css");
+            //    }
+            //);
 
-            options.ScriptBundles.Configure(
-                LeptonXLiteThemeBundles.Scripts.Global,
-                bundle =>
-                {
-                    bundle.AddFiles("/global-scripts.js");
-                }
-            );
+            //options.ScriptBundles.Configure(
+            //    LeptonXLiteThemeBundles.Scripts.Global,
+            //    bundle =>
+            //    {
+            //        bundle.AddFiles("/global-scripts.js");
+            //    }
+            //);
 
             // Blazor UI
             options.StyleBundles.Configure(
@@ -222,7 +220,6 @@ public class TTShangBlazorModule : AbpModule
             Configure<AbpVirtualFileSystemOptions>(options =>
             {
                 options.FileSets.ReplaceEmbeddedByPhysical<TTShangDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}TTShang.Domain.Shared"));
-                options.FileSets.ReplaceEmbeddedByPhysical<AbpAspNetCoreMvcUiLeptonXLiteThemeModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}..{0}modules{0}Volo.Abp.LeptonXLiteTheme{0}src{0}Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite", Path.DirectorySeparatorChar)));
                 options.FileSets.ReplaceEmbeddedByPhysical<AbpAspNetCoreComponentsServerLeptonXLiteThemeModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}..{0}modules{0}Volo.Abp.LeptonXLiteTheme{0}src{0}Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme", Path.DirectorySeparatorChar)));
                 options.FileSets.ReplaceEmbeddedByPhysical<TTShangDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}TTShang.Domain"));
                 options.FileSets.ReplaceEmbeddedByPhysical<TTShangApplicationContractsModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}TTShang.Application.Contracts"));

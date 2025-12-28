@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+    
+    <Import Project="..\..\..\common.props" />
+    <Import Project="..\..\..\configureawait.props" />
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+    </PropertyGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="Volo.Abp.SettingManagement.HttpApi.Client" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\..\AntDesignTheme\TTShang.Abp.AspnetCore.Components.WebAssembly.AntDesignTheme\TTShang.Abp.AspnetCore.Components.WebAssembly.AntDesignTheme.csproj" />
+      <ProjectReference Include="..\TTShang.Abp.SettingManagement.Blazor.AntDesignUI\TTShang.Abp.SettingManagement.Blazor.AntDesignUI.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <PackageReference Update="Fody">
+        <PrivateAssets>all</PrivateAssets>
+      </PackageReference>
+    </ItemGroup>
+
+
+</Project>

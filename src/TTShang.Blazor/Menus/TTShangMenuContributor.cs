@@ -4,9 +4,12 @@ using TTShang.Permissions;
 using TTShang.MultiTenancy;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.UI.Navigation;
-using Volo.Abp.SettingManagement.Blazor.Menus;
-using Volo.Abp.TenantManagement.Blazor.Navigation;
-using Volo.Abp.Identity.Blazor;
+using TTShang.Abp.TenantManagement.Blazor.AntDesignUI;
+using TTShang.Abp.IdentityManagement.Blazor.AntDesignUI;
+using TTShang.Abp.SettingManagement.Blazor.AntDesignUI;
+//using Volo.Abp.SettingManagement.Blazor.Menus;
+//using Volo.Abp.TenantManagement.Blazor.Navigation;
+//using Volo.Abp.Identity.Blazor;
 
 namespace TTShang.Blazor.Menus;
 
@@ -41,6 +44,7 @@ public class TTShangMenuContributor : IMenuContributor
     
         if (MultiTenancyConsts.IsEnabled)
         {
+            //administration.SetSubItemOrder(TenantManagementMenuNames.GroupName, 1);
             administration.SetSubItemOrder(TenantManagementMenuNames.GroupName, 1);
         }
         else
@@ -48,6 +52,8 @@ public class TTShangMenuContributor : IMenuContributor
             administration.TryRemoveMenuItem(TenantManagementMenuNames.GroupName);
         }
 
+        //administration.SetSubItemOrder(IdentityMenuNames.GroupName, 2);
+        //administration.SetSubItemOrder(SettingManagementMenus.GroupName, 3);
         administration.SetSubItemOrder(IdentityMenuNames.GroupName, 2);
         administration.SetSubItemOrder(SettingManagementMenus.GroupName, 3);
 

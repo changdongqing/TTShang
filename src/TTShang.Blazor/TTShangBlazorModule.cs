@@ -1,56 +1,64 @@
-using System;
-using System.IO;
-using System.Security.Cryptography.X509Certificates;
 using Blazorise;
 using Blazorise.Bootstrap5;
 using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Extensions.DependencyInjection;
-using OpenIddict.Validation.AspNetCore;
-using OpenIddict.Server.AspNetCore;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
+using OpenIddict.Server.AspNetCore;
+using OpenIddict.Validation.AspNetCore;
+using System;
+using System.IO;
+using System.Security.Cryptography.X509Certificates;
+using TTShang.Abp.AspnetCore.Components.Server.AntDesignTheme;
+using TTShang.Abp.AspnetCore.Components.Server.AntDesignTheme.Bundling;
+using TTShang.Abp.AspnetCore.Components.Web.AntDesignTheme.Routing;
+using TTShang.Abp.FeatureManagement.Blazor.AntDesignUI;
+using TTShang.Abp.FeatureManagement.Blazor.Server.AntDesignUI;
+using TTShang.Abp.IdentityManagement.Blazor.AntDesignUI;
+using TTShang.Abp.IdentityManagement.Blazor.Server.AntDesignUI;
+using TTShang.Abp.SettingManagement.Blazor.Server.AntDesignUI;
+using TTShang.Abp.TenantManagement.Blazor.AntDesignUI;
 using TTShang.Blazor.Components;
+using TTShang.Blazor.HealthChecks;
 using TTShang.Blazor.Menus;
 using TTShang.EntityFrameworkCore;
 using TTShang.Localization;
 using TTShang.MultiTenancy;
-using Microsoft.OpenApi.Models;
 using Volo.Abp;
 using Volo.Abp.Account.Web;
+using Volo.Abp.AspNetCore.Components.Server;
+//using Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme;
+//using Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme.Bundling;
 using Volo.Abp.AspNetCore.Components.Web;
-using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
+//using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.Localization;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
-using Volo.Abp.AspNetCore.Components.Server;
-using Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme;
-using Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme.Bundling;
-
-using Volo.Abp.Identity;
 using Volo.Abp.Autofac;
-using Volo.Abp.Mapperly;
-using TTShang.Blazor.HealthChecks;
-using Volo.Abp.Identity.Blazor.Server;
-using Volo.Abp.TenantManagement.Blazor.Server;
-using Volo.Abp.SettingManagement.Blazor.Server;
-using Volo.Abp.FeatureManagement.Blazor.Server;
-using Volo.Abp.Security.Claims;
+//using Volo.Abp.FeatureManagement.Blazor.Server;
+using Volo.Abp.Identity;
+//using Volo.Abp.Identity.Blazor.Server;
 using Volo.Abp.Localization;
+using Volo.Abp.Mapperly;
 using Volo.Abp.Modularity;
 using Volo.Abp.OpenIddict;
+using Volo.Abp.Security.Claims;
+//using Volo.Abp.SettingManagement.Blazor.Server;
+using Volo.Abp.Studio.Client.AspNetCore;
 using Volo.Abp.Swashbuckle;
+//using Volo.Abp.TenantManagement.Blazor.Server;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
-using Volo.Abp.Studio.Client.AspNetCore;
 
 namespace TTShang.Blazor;
 
@@ -61,13 +69,18 @@ namespace TTShang.Blazor;
     typeof(TTShangHttpApiModule),
     typeof(AbpAutofacModule),
     typeof(AbpSwashbuckleModule),
-    typeof(AbpIdentityBlazorServerModule),
-    typeof(AbpTenantManagementBlazorServerModule),
+    typeof(AbpIdentityBlazorServerAntDesignModule),
+    //typeof(AbpIdentityBlazorServerModule),
+    typeof(AbpTenantManagementBlazorAntDesignModule),
+    //typeof(AbpTenantManagementBlazorServerModule),
     typeof(AbpAccountWebOpenIddictModule),
-    typeof(AbpAspNetCoreComponentsServerLeptonXLiteThemeModule),
+    //typeof(AbpAspNetCoreComponentsServerLeptonXLiteThemeModule),
+    typeof(AbpAspNetCoreComponentsServerAntDesignThemeModule),
     typeof(AbpAspNetCoreSerilogModule),
-    typeof(AbpFeatureManagementBlazorServerModule),
-    typeof(AbpSettingManagementBlazorServerModule)
+    //typeof(AbpFeatureManagementBlazorServerModule),
+    typeof(AbpFeatureManagementBlazorAntDesignModule),
+    //typeof(AbpSettingManagementBlazorServerModule)
+    typeof(AbpSettingManagementBlazorServerAntDesignModule)
    )]
 public class TTShangBlazorModule : AbpModule
 {
@@ -198,13 +211,17 @@ public class TTShangBlazorModule : AbpModule
             //);
 
             // Blazor UI
-            options.StyleBundles.Configure(
-                BlazorLeptonXLiteThemeBundles.Styles.Global,
-                bundle =>
-                {
+            //options.StyleBundles.Configure(
+            //    BlazorLeptonXLiteThemeBundles.Styles.Global,
+            //    bundle =>
+            //    {
+            //        bundle.AddFiles("/global-styles.css");
+            //    }
+            //);
+            options.StyleBundles.Configure(BlazorAntDesignThemeBundles.Styles.Global,
+                bundle => { 
                     bundle.AddFiles("/global-styles.css");
-                }
-            );
+                });
         });
     }
 
@@ -220,7 +237,8 @@ public class TTShangBlazorModule : AbpModule
             Configure<AbpVirtualFileSystemOptions>(options =>
             {
                 options.FileSets.ReplaceEmbeddedByPhysical<TTShangDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}TTShang.Domain.Shared"));
-                options.FileSets.ReplaceEmbeddedByPhysical<AbpAspNetCoreComponentsServerLeptonXLiteThemeModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}..{0}modules{0}Volo.Abp.LeptonXLiteTheme{0}src{0}Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme", Path.DirectorySeparatorChar)));
+                //options.FileSets.ReplaceEmbeddedByPhysical<AbpAspNetCoreComponentsServerLeptonXLiteThemeModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}..{0}modules{0}Volo.Abp.LeptonXLiteTheme{0}src{0}Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme", Path.DirectorySeparatorChar)));
+                options.FileSets.ReplaceEmbeddedByPhysical<AbpAspNetCoreComponentsServerAntDesignThemeModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}..{0}modules{0}Volo.Abp.AntDesignTheme{0}src{0}Volo.Abp.AspNetCore.Components.Server.AntDesignTheme", Path.DirectorySeparatorChar)));
                 options.FileSets.ReplaceEmbeddedByPhysical<TTShangDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}TTShang.Domain"));
                 options.FileSets.ReplaceEmbeddedByPhysical<TTShangApplicationContractsModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}TTShang.Application.Contracts"));
                 options.FileSets.ReplaceEmbeddedByPhysical<TTShangApplicationModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}TTShang.Application"));
@@ -265,9 +283,14 @@ public class TTShangBlazorModule : AbpModule
 
     private void ConfigureRouter(ServiceConfigurationContext context)
     {
+        //Configure<AbpRouterOptions>(options =>
+        //{
+        //    options.AppAssembly = typeof(TTShangBlazorModule).Assembly;
+        //});
+
         Configure<AbpRouterOptions>(options =>
         {
-            options.AppAssembly = typeof(TTShangBlazorModule).Assembly;
+            options.AdditionalAssemblies.Add(typeof(TTShangBlazorModule).Assembly);
         });
     }
 

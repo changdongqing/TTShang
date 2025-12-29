@@ -9,7 +9,7 @@
 @inject IStringLocalizer<TTShangResource> L
 @inject AbpBlazorMessageLocalizerHelper<TTShangResource> LH
 @inherits AbpCrudPageBase<IBookAppService, BookDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateBookDto>
-
+@* 
 <Card>
     <CardHeader>
         <Row Class="justify-content-between">
@@ -200,5 +200,5 @@
 
         LocalizationResource = typeof(TTShangResource);
     }
-}
+} *@
 

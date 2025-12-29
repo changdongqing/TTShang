@@ -3,7 +3,7 @@
 @using Microsoft.Extensions.Options
 @inject IOptions<AbpRouterOptions> RouterOptions
 
-<Router AppAssembly="typeof(Program).Assembly" AdditionalAssemblies="RouterOptions.Value.AdditionalAssemblies">
+<Router AppAssembly="RouterOptions.Value.AppAssembly" AdditionalAssemblies="RouterOptions.Value.AdditionalAssemblies">
     <Found Context="routeData">
         <AuthorizeRouteView RouteData="routeData" DefaultLayout="typeof(DefaultLayout)">
             <NotAuthorized>

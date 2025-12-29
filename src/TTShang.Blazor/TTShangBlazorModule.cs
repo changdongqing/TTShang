@@ -283,15 +283,15 @@ public class TTShangBlazorModule : AbpModule
 
     private void ConfigureRouter(ServiceConfigurationContext context)
     {
-        //Configure<AbpRouterOptions>(options =>
-        //{
-        //    options.AppAssembly = typeof(TTShangBlazorModule).Assembly;
-        //});
-
         Configure<AbpRouterOptions>(options =>
         {
-            options.AdditionalAssemblies.Add(typeof(TTShangBlazorModule).Assembly);
+            options.AppAssembly = typeof(TTShangBlazorModule).Assembly;
         });
+
+        //Configure<AbpRouterOptions>(options =>
+        //{
+        //    options.AdditionalAssemblies.Add(typeof(TTShangBlazorModule).Assembly);
+        //});
     }
 
     private void ConfigureAutoApiControllers()

@@ -237,6 +237,7 @@ public class TTShangBlazorModule : AbpModule
             Configure<AbpVirtualFileSystemOptions>(options =>
             {
                 options.FileSets.ReplaceEmbeddedByPhysical<TTShangDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}TTShang.Domain.Shared"));
+                options.FileSets.ReplaceEmbeddedByPhysical<AbpAccountWebOpenIddictModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}..{0}modules{0}Volo.Abp.Account{0}src{0}Volo.Abp.Account.Web.OpenIddict", Path.DirectorySeparatorChar)));
                 //options.FileSets.ReplaceEmbeddedByPhysical<AbpAspNetCoreComponentsServerLeptonXLiteThemeModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}..{0}modules{0}Volo.Abp.LeptonXLiteTheme{0}src{0}Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme", Path.DirectorySeparatorChar)));
                 options.FileSets.ReplaceEmbeddedByPhysical<AbpAspNetCoreComponentsServerAntDesignThemeModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}..{0}modules{0}Volo.Abp.AntDesignTheme{0}src{0}Volo.Abp.AspNetCore.Components.Server.AntDesignTheme", Path.DirectorySeparatorChar)));
                 options.FileSets.ReplaceEmbeddedByPhysical<TTShangDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}TTShang.Domain"));

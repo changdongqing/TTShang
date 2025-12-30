@@ -12,12 +12,12 @@
     <ProjectReference Include="..\LeptonXLite.DemoApp.Application.Contracts\LeptonXLite.DemoApp.Application.Contracts.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Account.Application" Version="10.0.1" />
     <PackageReference Include="Volo.Abp.Identity.Application" Version="10.0.1" />
     <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="10.0.1" />
     <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="10.0.1" />
     <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="10.0.1" />
     <PackageReference Include="Volo.Abp.SettingManagement.Application" Version="10.0.1" />
     <PackageReference Include="Volo.CmsKit.Application" Version="10.0.1" />
+    <ProjectReference Include="../../../Volo.Abp.Account/src/Volo.Abp.Account.Application/Volo.Abp.Account.Application.csproj" />
   </ItemGroup>
 </Project>

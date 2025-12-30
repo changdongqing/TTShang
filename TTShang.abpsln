@@ -13,6 +13,9 @@
     },
     "Volo.Abp.LeptonXLiteTheme": {
       "path": "modules/Volo.Abp.LeptonXLiteTheme/Volo.Abp.LeptonXLiteTheme.abpmdl"
+    },
+    "Volo.Abp.Account": {
+      "path": "modules/Volo.Abp.Account/Volo.Abp.Account.abpmdl"
     }
   },
   "runProfiles": {

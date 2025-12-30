@@ -1,3 +1,5 @@
+using System.IO;
+using Volo.Abp.VirtualFileSystem;
 using Volo.Abp.Account;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;

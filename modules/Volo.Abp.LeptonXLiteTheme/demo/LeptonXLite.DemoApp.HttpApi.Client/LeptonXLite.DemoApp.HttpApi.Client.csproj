@@ -11,13 +11,13 @@
     <ProjectReference Include="..\LeptonXLite.DemoApp.Application.Contracts\LeptonXLite.DemoApp.Application.Contracts.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Account.HttpApi.Client" Version="10.0.1" />
     <PackageReference Include="Volo.Abp.Identity.HttpApi.Client" Version="10.0.1" />
     <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi.Client" Version="10.0.1" />
     <PackageReference Include="Volo.Abp.TenantManagement.HttpApi.Client" Version="10.0.1" />
     <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi.Client" Version="10.0.1" />
     <PackageReference Include="Volo.Abp.SettingManagement.HttpApi.Client" Version="10.0.1" />
     <PackageReference Include="Volo.CmsKit.HttpApi.Client" Version="10.0.1" />
+    <ProjectReference Include="../../../Volo.Abp.Account/src/Volo.Abp.Account.HttpApi.Client/Volo.Abp.Account.HttpApi.Client.csproj" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="**\*generate-proxy.json" />

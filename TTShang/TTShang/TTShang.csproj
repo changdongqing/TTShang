@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+		<LangVersion>preview</LangVersion>
+		<TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\TTShang.Application\TTShang.Application.csproj" />
+    <ProjectReference Include="..\..\TTShang.HttpApi\TTShang.HttpApi.csproj" />
+    <ProjectReference Include="..\TTShang.Client\TTShang.Client.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.0" />
+	</ItemGroup>
+
+</Project>

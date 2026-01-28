@@ -13,6 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TTShang.FeatureManagement.Application.Contracts\TTShang.FeatureManagement.Application.Contracts.csproj"/>
+    <!--<ProjectReference Include="..\TTShang.FeatureManagement.Application.Contracts\TTShang.FeatureManagement.Application.Contracts.csproj"/>-->
   </ItemGroup>
 </Project>

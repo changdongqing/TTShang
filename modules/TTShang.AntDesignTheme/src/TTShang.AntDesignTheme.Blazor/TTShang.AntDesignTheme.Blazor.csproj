@@ -13,6 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TTShang.AntDesignTheme.Application.Contracts\TTShang.AntDesignTheme.Application.Contracts.csproj"/>
+    <!--<ProjectReference Include="..\TTShang.AntDesignTheme.Application.Contracts\TTShang.AntDesignTheme.Application.Contracts.csproj"/>-->
   </ItemGroup>
 </Project>

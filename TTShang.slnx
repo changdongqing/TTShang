@@ -1,21 +1,51 @@
 <Solution>
+    <Folder Name="/.slnitems/">
+        <File Path="../TTShang.AntDesignUI/configureawait.props" />
+        <File Path="common.props" />
+        <File Path="Directory.DotSettings" />
+        <File Path="NuGet.Config" />
+    </Folder>
     <Folder Name="/modules/" />
+    <Folder Name="/modules/TTShang.AntDesignTheme/">
+        <Project Path="modules/TTShang.AntDesignTheme/src/TTShang.AntDesignTheme.Blazor.Server/TTShang.AntDesignTheme.Blazor.Server.csproj" />
+        <Project Path="modules/TTShang.AntDesignTheme/src/TTShang.AntDesignTheme.Blazor/TTShang.AntDesignTheme.Blazor.csproj" />
+    </Folder>
+    <Folder Name="/modules/TTShang.FeatureManagement/">
+        <Project Path="modules/TTShang.FeatureManagement/src/TTShang.FeatureManagement.Blazor.Server/TTShang.FeatureManagement.Blazor.Server.csproj" />
+        <Project Path="modules/TTShang.FeatureManagement/src/TTShang.FeatureManagement.Blazor/TTShang.FeatureManagement.Blazor.csproj" />
+    </Folder>
+    <Folder Name="/modules/TTShang.IdentityManagement/">
+        <Project Path="modules/TTShang.IdentityManagement/src/TTShang.IdentityManagement.Blazor.Server/TTShang.IdentityManagement.Blazor.Server.csproj" />
+        <Project Path="modules/TTShang.IdentityManagement/src/TTShang.IdentityManagement.Blazor/TTShang.IdentityManagement.Blazor.csproj" />
+    </Folder>
+    <Folder Name="/modules/TTShang.PermissionManagement/">
+        <Project Path="modules/TTShang.PermissionManagement/src/TTShang.PermissionManagement.Blazor.Server/TTShang.PermissionManagement.Blazor.Server.csproj" />
+        <Project Path="modules/TTShang.PermissionManagement/src/TTShang.PermissionManagement.Blazor/TTShang.PermissionManagement.Blazor.csproj" />
+    </Folder>
+    <Folder Name="/modules/TTShang.SettingManagement/">
+        <Project Path="modules/TTShang.SettingManagement/src/TTShang.SettingManagement.Blazor.Server/TTShang.SettingManagement.Blazor.Server.csproj" />
+        <Project Path="modules/TTShang.SettingManagement/src/TTShang.SettingManagement.Blazor/TTShang.SettingManagement.Blazor.csproj" />
+    </Folder>
+    <Folder Name="/modules/TTShang.TenantManagement/">
+        <Project Path="modules/TTShang.TenantManagement/src/TTShang.TenantManagement.Blazor.Server/TTShang.TenantManagement.Blazor.Server.csproj" />
+        <Project Path="modules/TTShang.TenantManagement/src/TTShang.TenantManagement.Blazor/TTShang.TenantManagement.Blazor.csproj" />
+    </Folder>
     <Folder Name="/src/">
-        <Project Path="src/TTShang.Domain/TTShang.Domain.csproj" />
-        <Project Path="src/TTShang.Application/TTShang.Application.csproj" />
-        <Project Path="src/TTShang.EntityFrameworkCore/TTShang.EntityFrameworkCore.csproj" />
-        <Project Path="src/TTShang.Domain.Shared/TTShang.Domain.Shared.csproj" />
         <Project Path="src/TTShang.Application.Contracts/TTShang.Application.Contracts.csproj" />
-        <Project Path="src/TTShang.HttpApi/TTShang.HttpApi.csproj" />
-        <Project Path="src/TTShang.HttpApi.Client/TTShang.HttpApi.Client.csproj" />
-        <Project Path="src/TTShang.DbMigrator/TTShang.DbMigrator.csproj" />
+        <Project Path="src/TTShang.Application/TTShang.Application.csproj" />
         <Project Path="src/TTShang.Blazor/TTShang.Blazor.csproj" />
+        <Project Path="src/TTShang.DbMigrator/TTShang.DbMigrator.csproj" />
+        <Project Path="src/TTShang.Domain.Shared/TTShang.Domain.Shared.csproj" />
+        <Project Path="src/TTShang.Domain/TTShang.Domain.csproj" />
+        <Project Path="src/TTShang.EntityFrameworkCore/TTShang.EntityFrameworkCore.csproj" />
+        <Project Path="src/TTShang.HttpApi.Client/TTShang.HttpApi.Client.csproj" />
+        <Project Path="src/TTShang.HttpApi/TTShang.HttpApi.csproj" />
     </Folder>
     <Folder Name="/test/">
         <Project Path="test/TTShang.Application.Tests/TTShang.Application.Tests.csproj" />
-        <Project Path="test/TTShang.EntityFrameworkCore.Tests/TTShang.EntityFrameworkCore.Tests.csproj" />
-        <Project Path="test/TTShang.TestBase/TTShang.TestBase.csproj" />
         <Project Path="test/TTShang.Domain.Tests/TTShang.Domain.Tests.csproj" />
+        <Project Path="test/TTShang.EntityFrameworkCore.Tests/TTShang.EntityFrameworkCore.Tests.csproj" />
         <Project Path="test/TTShang.HttpApi.Client.ConsoleTestApp/TTShang.HttpApi.Client.ConsoleTestApp.csproj" />
+        <Project Path="test/TTShang.TestBase/TTShang.TestBase.csproj" />
     </Folder>
 </Solution>

@@ -1,58 +1,65 @@
-using System;
-using System.IO;
-using System.Security.Cryptography.X509Certificates;
-using Blazorise;
-using Blazorise.Bootstrap5;
-using Blazorise.Icons.FontAwesome;
+//using Blazorise;
+//using Blazorise.Bootstrap5;
+//using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Extensions.DependencyInjection;
-using OpenIddict.Validation.AspNetCore;
-using OpenIddict.Server.AspNetCore;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
+using OpenIddict.Server.AspNetCore;
+using OpenIddict.Validation.AspNetCore;
+using System;
+using System.IO;
+using System.Security.Cryptography.X509Certificates;
+using TTShang.AntDesignTheme.Blazor.Routing;
+using TTShang.AntDesignTheme.Blazor.Server;
+using TTShang.AntDesignTheme.Blazor.Server.Bundling;
 using TTShang.Blazor.Components;
+using TTShang.Blazor.HealthChecks;
 using TTShang.Blazor.Menus;
 using TTShang.EntityFrameworkCore;
+using TTShang.FeatureManagement.Blazor.Server;
+using TTShang.IdentityManagement.Blazor.Server;
 using TTShang.Localization;
 using TTShang.MultiTenancy;
-using Microsoft.OpenApi.Models;
+using TTShang.SettingManagement.Blazor.Server;
+using TTShang.TenantManagement.Blazor.Server;
 using Volo.Abp;
-using Volo.Abp.Studio;
 using Volo.Abp.Account.Web;
+using Volo.Abp.AspNetCore.Components.Server;
 using Volo.Abp.AspNetCore.Components.Web;
-using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
+//using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.Localization;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
-using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
-using Volo.Abp.AspNetCore.Serilog;
-using Volo.Abp.AspNetCore.Components.Server;
-using Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme;
-using Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme.Bundling;
+//using Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme;
+//using Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite.Bundling;
-using Volo.Abp.Identity;
+using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
+using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
-using Volo.Abp.Mapperly;
-using TTShang.Blazor.HealthChecks;
-using Volo.Abp.Identity.Blazor.Server;
-using Volo.Abp.TenantManagement.Blazor.Server;
-using Volo.Abp.SettingManagement.Blazor.Server;
-using Volo.Abp.FeatureManagement.Blazor.Server;
-using Volo.Abp.Security.Claims;
+using Volo.Abp.Identity;
 using Volo.Abp.Localization;
+using Volo.Abp.Mapperly;
 using Volo.Abp.Modularity;
 using Volo.Abp.OpenIddict;
+//using Volo.Abp.Identity.Blazor.Server;
+//using Volo.Abp.TenantManagement.Blazor.Server;
+//using Volo.Abp.SettingManagement.Blazor.Server;
+//using Volo.Abp.FeatureManagement.Blazor.Server;
+using Volo.Abp.Security.Claims;
+using Volo.Abp.Studio;
+using Volo.Abp.Studio.Client.AspNetCore;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
-using Volo.Abp.Studio.Client.AspNetCore;
 
 namespace TTShang.Blazor;
 
@@ -63,14 +70,14 @@ namespace TTShang.Blazor;
     typeof(TTShangHttpApiModule),
     typeof(AbpAutofacModule),
     typeof(AbpSwashbuckleModule),
-    typeof(AbpIdentityBlazorServerModule),
-    typeof(AbpTenantManagementBlazorServerModule),
+    typeof(AbpIdentityBlazorServerAntDesignModule),
+    typeof(AbpTenantManagementBlazorServerAntDesignModule),
     typeof(AbpAccountWebOpenIddictModule),
-    typeof(AbpAspNetCoreComponentsServerLeptonXLiteThemeModule),
+    typeof(AbpAspNetCoreComponentsServerAntDesignThemeModule),
     typeof(AbpAspNetCoreMvcUiLeptonXLiteThemeModule),
     typeof(AbpAspNetCoreSerilogModule),
-    typeof(AbpFeatureManagementBlazorServerModule),
-    typeof(AbpSettingManagementBlazorServerModule)
+    typeof(AbpFeatureManagementBlazorServerAntDesignModule),
+    typeof(AbpSettingManagementBlazorServerAntDesignModule)
    )]
 public class TTShangBlazorModule : AbpModule
 {
@@ -159,7 +166,7 @@ public class TTShangBlazorModule : AbpModule
         ConfigureVirtualFileSystem(hostingEnvironment);
         ConfigureSwaggerServices(context.Services);
         ConfigureAutoApiControllers();
-        ConfigureBlazorise(context);
+        //ConfigureBlazorise(context);
         ConfigureRouter(context);
         ConfigureMenu(context);
     }
@@ -216,7 +223,7 @@ public class TTShangBlazorModule : AbpModule
 
             // Blazor UI
             options.StyleBundles.Configure(
-                BlazorLeptonXLiteThemeBundles.Styles.Global,
+                BlazorAntDesignThemeBundles.Styles.Global,
                 bundle =>
                 {
                     bundle.AddFiles("/global-styles.css");
@@ -258,17 +265,17 @@ public class TTShangBlazorModule : AbpModule
     }
 
 
-    private void ConfigureBlazorise(ServiceConfigurationContext context)
-    {
-        context.Services
-            .AddBlazorise(options =>
-            {
-                // TODO (IMPORTANT): To use Blazorise, you need a license key. Get your license key directly from Blazorise, follow  the instructions at https://abp.io/faq#how-to-get-blazorise-license-key
-                //options.ProductToken = "Your Product Token";
-            })
-            .AddBootstrap5Providers()
-            .AddFontAwesomeIcons();
-    }
+    //private void ConfigureBlazorise(ServiceConfigurationContext context)
+    //{
+    //    context.Services
+    //        .AddBlazorise(options =>
+    //        {
+    //            // TODO (IMPORTANT): To use Blazorise, you need a license key. Get your license key directly from Blazorise, follow  the instructions at https://abp.io/faq#how-to-get-blazorise-license-key
+    //            //options.ProductToken = "Your Product Token";
+    //        })
+    //        .AddBootstrap5Providers()
+    //        .AddFontAwesomeIcons();
+    //}
 
     private void ConfigureMenu(ServiceConfigurationContext context)
     {

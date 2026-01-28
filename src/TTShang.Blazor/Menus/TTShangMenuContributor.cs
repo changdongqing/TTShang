@@ -4,9 +4,13 @@ using TTShang.Permissions;
 using TTShang.MultiTenancy;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.UI.Navigation;
-using Volo.Abp.SettingManagement.Blazor.Menus;
-using Volo.Abp.TenantManagement.Blazor.Navigation;
-using Volo.Abp.Identity.Blazor;
+using TTShang.TenantManagement.Blazor;
+using TTShang.IdentityManagement.Blazor;
+using TTShang.SettingManagement.Blazor;
+using AntDesign;
+//using Volo.Abp.SettingManagement.Blazor.Menus;
+//using Volo.Abp.TenantManagement.Blazor.Navigation;
+//using Volo.Abp.Identity.Blazor;
 
 namespace TTShang.Blazor.Menus;
 
@@ -30,7 +34,7 @@ public class TTShangMenuContributor : IMenuContributor
                 TTShangMenus.Home,
                 l["Menu:Home"],
                 "/",
-                icon: "fas fa-home",
+                icon: IconType.Outline.Home,
                 order: 1
             )
         );

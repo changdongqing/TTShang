@@ -17,8 +17,6 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.2" />
     <PackageReference Include="Serilog.AspNetCore" Version="10.0.0" />
     <PackageReference Include="Serilog.Sinks.Async" Version="2.1.0" />
-    <PackageReference Include="Blazorise.Bootstrap5" Version="1.8.9" />
-    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.8.9" />
     <PackageReference Include="AspNetCore.HealthChecks.UI" Version="9.0.0" />
     <PackageReference Include="KubernetesClient" Version="18.0.13" />
     <PackageReference Include="IdentityModel" Version="7.0.0" />
@@ -28,22 +26,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\modules\TTShang.AntDesignTheme\src\TTShang.AntDesignTheme.Blazor.Server\TTShang.AntDesignTheme.Blazor.Server.csproj" />
+    <ProjectReference Include="..\..\modules\TTShang.FeatureManagement\src\TTShang.FeatureManagement.Blazor.Server\TTShang.FeatureManagement.Blazor.Server.csproj" />
+    <ProjectReference Include="..\..\modules\TTShang.IdentityManagement\src\TTShang.IdentityManagement.Blazor.Server\TTShang.IdentityManagement.Blazor.Server.csproj" />
+    <ProjectReference Include="..\..\modules\TTShang.SettingManagement\src\TTShang.SettingManagement.Blazor.Server\TTShang.SettingManagement.Blazor.Server.csproj" />
+    <ProjectReference Include="..\..\modules\TTShang.TenantManagement\src\TTShang.TenantManagement.Blazor.Server\TTShang.TenantManagement.Blazor.Server.csproj" />
     <ProjectReference Include="..\TTShang.Application\TTShang.Application.csproj" />
     <ProjectReference Include="..\TTShang.HttpApi\TTShang.HttpApi.csproj" />
     <ProjectReference Include="..\TTShang.EntityFrameworkCore\TTShang.EntityFrameworkCore.csproj" />
     <PackageReference Include="Volo.Abp.Autofac" Version="10.0.2" />
     <PackageReference Include="Volo.Abp.Swashbuckle" Version="10.0.2" />
     <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="10.0.2" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Blazor.Server" Version="10.0.2" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.Blazor.Server" Version="10.0.2" />
     <PackageReference Include="Volo.Abp.Account.Web.OpenIddict" Version="10.0.2" />
-    <PackageReference Include="Volo.Abp.Identity.Blazor.Server" Version="10.0.2" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Blazor.Server" Version="10.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" Version="5.0.2" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme" Version="5.0.2" />
   </ItemGroup>
 
   <ItemGroup>

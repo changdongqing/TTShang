@@ -1,8 +1,9 @@
 ﻿@using System.Globalization
 @using Microsoft.Extensions.Hosting
-@using Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme.Bundling
+@using TTShang.AntDesignTheme.Blazor.Server.Bundling
+@* @using Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme.Bundling *@
 @using Volo.Abp.Localization
-@using Volo.Abp.AspNetCore.Components.Web.Theming.Bundling
+@* @using Volo.Abp.AspNetCore.Components.Web.Theming.Bundling *@
 @inject IHostEnvironment Env
 @{
     var rtl = CultureHelper.IsRtl ? "rtl" : string.Empty;
@@ -16,7 +17,7 @@
     <title>TTShang</title>
     <base href="/" />
 
-    <AbpStyles BundleName="@BlazorLeptonXLiteThemeBundles.Styles.Global" />
+    <AbpStyles BundleName="@BlazorAntDesignThemeBundles.Styles.Global" />
 
     <link href="TTShang.Blazor.styles.css" rel="stylesheet"/>
 
@@ -41,7 +42,7 @@
         <a class="dismiss">🗙</a>
     </div>
     
-    <AbpScripts BundleName="@BlazorLeptonXLiteThemeBundles.Scripts.Global" />
+    <AbpScripts BundleName="@BlazorAntDesignThemeBundles.Scripts.Global" />
 
     <script src="_framework/blazor.web.js"></script>
 

@@ -1,0 +1,25 @@
+<Solution>
+    <Configurations>
+        <Platform Name="Any CPU" />
+    </Configurations>
+
+    <Folder Name="/src/">
+        <Project Path="src/TTShang.AntDesignTheme.Domain.Shared/TTShang.AntDesignTheme.Domain.Shared.csproj" />
+        <Project Path="src/TTShang.AntDesignTheme.Domain/TTShang.AntDesignTheme.Domain.csproj" />
+        <Project Path="src/TTShang.AntDesignTheme.Application.Contracts/TTShang.AntDesignTheme.Application.Contracts.csproj" />
+        <Project Path="src/TTShang.AntDesignTheme.Application/TTShang.AntDesignTheme.Application.csproj" />
+        <Project Path="src/TTShang.AntDesignTheme.EntityFrameworkCore/TTShang.AntDesignTheme.EntityFrameworkCore.csproj" />
+        <Project Path="src/TTShang.AntDesignTheme.HttpApi/TTShang.AntDesignTheme.HttpApi.csproj" />
+        <Project Path="src/TTShang.AntDesignTheme.HttpApi.Client/TTShang.AntDesignTheme.HttpApi.Client.csproj" />
+        <Project Path="src/TTShang.AntDesignTheme.Blazor/TTShang.AntDesignTheme.Blazor.csproj" />
+        <Project Path="src/TTShang.AntDesignTheme.Blazor.Server/TTShang.AntDesignTheme.Blazor.Server.csproj" />
+        <Project Path="src/TTShang.AntDesignTheme.Installer/TTShang.AntDesignTheme.Installer.csproj" />
+    </Folder>
+    
+    <Folder Name="/test/">
+        <Project Path="test/TTShang.AntDesignTheme.TestBase/TTShang.AntDesignTheme.TestBase.csproj" />
+        <Project Path="test/TTShang.AntDesignTheme.EntityFrameworkCore.Tests/TTShang.AntDesignTheme.EntityFrameworkCore.Tests.csproj" />
+        <Project Path="test/TTShang.AntDesignTheme.Domain.Tests/TTShang.AntDesignTheme.Domain.Tests.csproj" />
+        <Project Path="test/TTShang.AntDesignTheme.Application.Tests/TTShang.AntDesignTheme.Application.Tests.csproj" />
+    </Folder>
+</Solution>

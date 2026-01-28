@@ -1,0 +1,66 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "TTShang.PermissionManagement.Domain": {
+      "path": "src/TTShang.PermissionManagement.Domain/TTShang.PermissionManagement.Domain.abppkg",
+      "folder": "src"
+    },
+    "TTShang.PermissionManagement.Application.Contracts": {
+      "path": "src/TTShang.PermissionManagement.Application.Contracts/TTShang.PermissionManagement.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "TTShang.PermissionManagement.Application": {
+      "path": "src/TTShang.PermissionManagement.Application/TTShang.PermissionManagement.Application.abppkg",
+      "folder": "src"
+    },
+    "TTShang.PermissionManagement.EntityFrameworkCore": {
+      "path": "src/TTShang.PermissionManagement.EntityFrameworkCore/TTShang.PermissionManagement.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "TTShang.PermissionManagement.HttpApi": {
+      "path": "src/TTShang.PermissionManagement.HttpApi/TTShang.PermissionManagement.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "TTShang.PermissionManagement.HttpApi.Client": {
+      "path": "src/TTShang.PermissionManagement.HttpApi.Client/TTShang.PermissionManagement.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "TTShang.PermissionManagement.Blazor": {
+      "path": "src/TTShang.PermissionManagement.Blazor/TTShang.PermissionManagement.Blazor.abppkg",
+      "folder": "src"
+    },
+    "TTShang.PermissionManagement.Blazor.Server": {
+      "path": "src/TTShang.PermissionManagement.Blazor.Server/TTShang.PermissionManagement.Blazor.Server.abppkg",
+      "folder": "src"
+    },
+    "TTShang.PermissionManagement.TestBase": {
+      "path": "test/TTShang.PermissionManagement.TestBase/TTShang.PermissionManagement.TestBase.abppkg",
+      "folder": "test"
+    },
+    "TTShang.PermissionManagement.EntityFrameworkCore.Tests": {
+      "path": "test/TTShang.PermissionManagement.EntityFrameworkCore.Tests/TTShang.PermissionManagement.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "TTShang.PermissionManagement.Domain.Tests": {
+      "path": "test/TTShang.PermissionManagement.Domain.Tests/TTShang.PermissionManagement.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "TTShang.PermissionManagement.Application.Tests": {
+      "path": "test/TTShang.PermissionManagement.Application.Tests/TTShang.PermissionManagement.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "TTShang.PermissionManagement.Domain.Shared": {
+      "path": "src/TTShang.PermissionManagement.Domain.Shared/TTShang.PermissionManagement.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "TTShang.PermissionManagement.Installer": {
+       "path": "src/TTShang.PermissionManagement.Installer/TTShang.PermissionManagement.Installer.abppkg",
+       "folder": "src"
+    }
+  }
+}

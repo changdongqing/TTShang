@@ -1,0 +1,66 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "TTShang.SettingManagement.Domain": {
+      "path": "src/TTShang.SettingManagement.Domain/TTShang.SettingManagement.Domain.abppkg",
+      "folder": "src"
+    },
+    "TTShang.SettingManagement.Application.Contracts": {
+      "path": "src/TTShang.SettingManagement.Application.Contracts/TTShang.SettingManagement.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "TTShang.SettingManagement.Application": {
+      "path": "src/TTShang.SettingManagement.Application/TTShang.SettingManagement.Application.abppkg",
+      "folder": "src"
+    },
+    "TTShang.SettingManagement.EntityFrameworkCore": {
+      "path": "src/TTShang.SettingManagement.EntityFrameworkCore/TTShang.SettingManagement.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "TTShang.SettingManagement.HttpApi": {
+      "path": "src/TTShang.SettingManagement.HttpApi/TTShang.SettingManagement.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "TTShang.SettingManagement.HttpApi.Client": {
+      "path": "src/TTShang.SettingManagement.HttpApi.Client/TTShang.SettingManagement.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "TTShang.SettingManagement.Blazor": {
+      "path": "src/TTShang.SettingManagement.Blazor/TTShang.SettingManagement.Blazor.abppkg",
+      "folder": "src"
+    },
+    "TTShang.SettingManagement.Blazor.Server": {
+      "path": "src/TTShang.SettingManagement.Blazor.Server/TTShang.SettingManagement.Blazor.Server.abppkg",
+      "folder": "src"
+    },
+    "TTShang.SettingManagement.TestBase": {
+      "path": "test/TTShang.SettingManagement.TestBase/TTShang.SettingManagement.TestBase.abppkg",
+      "folder": "test"
+    },
+    "TTShang.SettingManagement.EntityFrameworkCore.Tests": {
+      "path": "test/TTShang.SettingManagement.EntityFrameworkCore.Tests/TTShang.SettingManagement.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "TTShang.SettingManagement.Domain.Tests": {
+      "path": "test/TTShang.SettingManagement.Domain.Tests/TTShang.SettingManagement.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "TTShang.SettingManagement.Application.Tests": {
+      "path": "test/TTShang.SettingManagement.Application.Tests/TTShang.SettingManagement.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "TTShang.SettingManagement.Domain.Shared": {
+      "path": "src/TTShang.SettingManagement.Domain.Shared/TTShang.SettingManagement.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "TTShang.SettingManagement.Installer": {
+       "path": "src/TTShang.SettingManagement.Installer/TTShang.SettingManagement.Installer.abppkg",
+       "folder": "src"
+    }
+  }
+}

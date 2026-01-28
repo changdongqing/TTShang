@@ -1,0 +1,9 @@
+{
+  "id": "f3a6036c-8d73-46df-9cf9-0a1d81776771",
+  "template": "empty",
+  "modules": {
+    "TTShang.SettingManagement": {
+      "path": "TTShang.SettingManagement.abpmdl"
+    }
+  }
+}

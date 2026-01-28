@@ -1,0 +1,9 @@
+{
+  "id": "66b2713d-7733-4f59-bc14-922aeeb2e7ec",
+  "template": "empty",
+  "modules": {
+    "TTShang.AntDesignTheme": {
+      "path": "TTShang.AntDesignTheme.abpmdl"
+    }
+  }
+}

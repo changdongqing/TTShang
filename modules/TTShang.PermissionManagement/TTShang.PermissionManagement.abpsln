@@ -1,0 +1,9 @@
+{
+  "id": "5898e1c1-949e-490e-9d7f-21eca3bcddf7",
+  "template": "empty",
+  "modules": {
+    "TTShang.PermissionManagement": {
+      "path": "TTShang.PermissionManagement.abpmdl"
+    }
+  }
+}

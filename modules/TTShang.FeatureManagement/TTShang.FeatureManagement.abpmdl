@@ -1,0 +1,66 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "TTShang.FeatureManagement.Domain": {
+      "path": "src/TTShang.FeatureManagement.Domain/TTShang.FeatureManagement.Domain.abppkg",
+      "folder": "src"
+    },
+    "TTShang.FeatureManagement.Application.Contracts": {
+      "path": "src/TTShang.FeatureManagement.Application.Contracts/TTShang.FeatureManagement.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "TTShang.FeatureManagement.Application": {
+      "path": "src/TTShang.FeatureManagement.Application/TTShang.FeatureManagement.Application.abppkg",
+      "folder": "src"
+    },
+    "TTShang.FeatureManagement.EntityFrameworkCore": {
+      "path": "src/TTShang.FeatureManagement.EntityFrameworkCore/TTShang.FeatureManagement.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "TTShang.FeatureManagement.HttpApi": {
+      "path": "src/TTShang.FeatureManagement.HttpApi/TTShang.FeatureManagement.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "TTShang.FeatureManagement.HttpApi.Client": {
+      "path": "src/TTShang.FeatureManagement.HttpApi.Client/TTShang.FeatureManagement.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "TTShang.FeatureManagement.Blazor": {
+      "path": "src/TTShang.FeatureManagement.Blazor/TTShang.FeatureManagement.Blazor.abppkg",
+      "folder": "src"
+    },
+    "TTShang.FeatureManagement.Blazor.Server": {
+      "path": "src/TTShang.FeatureManagement.Blazor.Server/TTShang.FeatureManagement.Blazor.Server.abppkg",
+      "folder": "src"
+    },
+    "TTShang.FeatureManagement.TestBase": {
+      "path": "test/TTShang.FeatureManagement.TestBase/TTShang.FeatureManagement.TestBase.abppkg",
+      "folder": "test"
+    },
+    "TTShang.FeatureManagement.EntityFrameworkCore.Tests": {
+      "path": "test/TTShang.FeatureManagement.EntityFrameworkCore.Tests/TTShang.FeatureManagement.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "TTShang.FeatureManagement.Domain.Tests": {
+      "path": "test/TTShang.FeatureManagement.Domain.Tests/TTShang.FeatureManagement.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "TTShang.FeatureManagement.Application.Tests": {
+      "path": "test/TTShang.FeatureManagement.Application.Tests/TTShang.FeatureManagement.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "TTShang.FeatureManagement.Domain.Shared": {
+      "path": "src/TTShang.FeatureManagement.Domain.Shared/TTShang.FeatureManagement.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "TTShang.FeatureManagement.Installer": {
+       "path": "src/TTShang.FeatureManagement.Installer/TTShang.FeatureManagement.Installer.abppkg",
+       "folder": "src"
+    }
+  }
+}

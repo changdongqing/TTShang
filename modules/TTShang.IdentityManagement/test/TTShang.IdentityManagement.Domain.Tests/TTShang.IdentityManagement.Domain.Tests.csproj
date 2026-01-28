@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <RootNamespace>TTShang.IdentityManagement</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\TTShang.IdentityManagement.Domain\TTShang.IdentityManagement.Domain.csproj" />
+    <ProjectReference Include="..\TTShang.IdentityManagement.TestBase\TTShang.IdentityManagement.TestBase.csproj" />
+  </ItemGroup>
+
+
+</Project>

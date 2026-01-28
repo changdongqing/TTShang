@@ -1,7 +1,5 @@
 <Solution>
-    <Configurations>
-        <Platform Name="Any CPU" />
-    </Configurations>
+    <Folder Name="/modules/" />
     <Folder Name="/src/">
         <Project Path="src/TTShang.Domain/TTShang.Domain.csproj" />
         <Project Path="src/TTShang.Application/TTShang.Application.csproj" />

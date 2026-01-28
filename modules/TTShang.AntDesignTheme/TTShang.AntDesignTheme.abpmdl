@@ -1,0 +1,66 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "TTShang.AntDesignTheme.Domain": {
+      "path": "src/TTShang.AntDesignTheme.Domain/TTShang.AntDesignTheme.Domain.abppkg",
+      "folder": "src"
+    },
+    "TTShang.AntDesignTheme.Application.Contracts": {
+      "path": "src/TTShang.AntDesignTheme.Application.Contracts/TTShang.AntDesignTheme.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "TTShang.AntDesignTheme.Application": {
+      "path": "src/TTShang.AntDesignTheme.Application/TTShang.AntDesignTheme.Application.abppkg",
+      "folder": "src"
+    },
+    "TTShang.AntDesignTheme.EntityFrameworkCore": {
+      "path": "src/TTShang.AntDesignTheme.EntityFrameworkCore/TTShang.AntDesignTheme.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "TTShang.AntDesignTheme.HttpApi": {
+      "path": "src/TTShang.AntDesignTheme.HttpApi/TTShang.AntDesignTheme.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "TTShang.AntDesignTheme.HttpApi.Client": {
+      "path": "src/TTShang.AntDesignTheme.HttpApi.Client/TTShang.AntDesignTheme.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "TTShang.AntDesignTheme.Blazor": {
+      "path": "src/TTShang.AntDesignTheme.Blazor/TTShang.AntDesignTheme.Blazor.abppkg",
+      "folder": "src"
+    },
+    "TTShang.AntDesignTheme.Blazor.Server": {
+      "path": "src/TTShang.AntDesignTheme.Blazor.Server/TTShang.AntDesignTheme.Blazor.Server.abppkg",
+      "folder": "src"
+    },
+    "TTShang.AntDesignTheme.TestBase": {
+      "path": "test/TTShang.AntDesignTheme.TestBase/TTShang.AntDesignTheme.TestBase.abppkg",
+      "folder": "test"
+    },
+    "TTShang.AntDesignTheme.EntityFrameworkCore.Tests": {
+      "path": "test/TTShang.AntDesignTheme.EntityFrameworkCore.Tests/TTShang.AntDesignTheme.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "TTShang.AntDesignTheme.Domain.Tests": {
+      "path": "test/TTShang.AntDesignTheme.Domain.Tests/TTShang.AntDesignTheme.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "TTShang.AntDesignTheme.Application.Tests": {
+      "path": "test/TTShang.AntDesignTheme.Application.Tests/TTShang.AntDesignTheme.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "TTShang.AntDesignTheme.Domain.Shared": {
+      "path": "src/TTShang.AntDesignTheme.Domain.Shared/TTShang.AntDesignTheme.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "TTShang.AntDesignTheme.Installer": {
+       "path": "src/TTShang.AntDesignTheme.Installer/TTShang.AntDesignTheme.Installer.abppkg",
+       "folder": "src"
+    }
+  }
+}

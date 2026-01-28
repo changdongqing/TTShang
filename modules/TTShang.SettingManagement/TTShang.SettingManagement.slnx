@@ -1,0 +1,25 @@
+<Solution>
+    <Configurations>
+        <Platform Name="Any CPU" />
+    </Configurations>
+
+    <Folder Name="/src/">
+        <Project Path="src/TTShang.SettingManagement.Domain.Shared/TTShang.SettingManagement.Domain.Shared.csproj" />
+        <Project Path="src/TTShang.SettingManagement.Domain/TTShang.SettingManagement.Domain.csproj" />
+        <Project Path="src/TTShang.SettingManagement.Application.Contracts/TTShang.SettingManagement.Application.Contracts.csproj" />
+        <Project Path="src/TTShang.SettingManagement.Application/TTShang.SettingManagement.Application.csproj" />
+        <Project Path="src/TTShang.SettingManagement.EntityFrameworkCore/TTShang.SettingManagement.EntityFrameworkCore.csproj" />
+        <Project Path="src/TTShang.SettingManagement.HttpApi/TTShang.SettingManagement.HttpApi.csproj" />
+        <Project Path="src/TTShang.SettingManagement.HttpApi.Client/TTShang.SettingManagement.HttpApi.Client.csproj" />
+        <Project Path="src/TTShang.SettingManagement.Blazor/TTShang.SettingManagement.Blazor.csproj" />
+        <Project Path="src/TTShang.SettingManagement.Blazor.Server/TTShang.SettingManagement.Blazor.Server.csproj" />
+        <Project Path="src/TTShang.SettingManagement.Installer/TTShang.SettingManagement.Installer.csproj" />
+    </Folder>
+    
+    <Folder Name="/test/">
+        <Project Path="test/TTShang.SettingManagement.TestBase/TTShang.SettingManagement.TestBase.csproj" />
+        <Project Path="test/TTShang.SettingManagement.EntityFrameworkCore.Tests/TTShang.SettingManagement.EntityFrameworkCore.Tests.csproj" />
+        <Project Path="test/TTShang.SettingManagement.Domain.Tests/TTShang.SettingManagement.Domain.Tests.csproj" />
+        <Project Path="test/TTShang.SettingManagement.Application.Tests/TTShang.SettingManagement.Application.Tests.csproj" />
+    </Folder>
+</Solution>

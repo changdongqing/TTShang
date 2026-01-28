@@ -1,0 +1,25 @@
+<Solution>
+    <Configurations>
+        <Platform Name="Any CPU" />
+    </Configurations>
+
+    <Folder Name="/src/">
+        <Project Path="src/TTShang.PermissionManagement.Domain.Shared/TTShang.PermissionManagement.Domain.Shared.csproj" />
+        <Project Path="src/TTShang.PermissionManagement.Domain/TTShang.PermissionManagement.Domain.csproj" />
+        <Project Path="src/TTShang.PermissionManagement.Application.Contracts/TTShang.PermissionManagement.Application.Contracts.csproj" />
+        <Project Path="src/TTShang.PermissionManagement.Application/TTShang.PermissionManagement.Application.csproj" />
+        <Project Path="src/TTShang.PermissionManagement.EntityFrameworkCore/TTShang.PermissionManagement.EntityFrameworkCore.csproj" />
+        <Project Path="src/TTShang.PermissionManagement.HttpApi/TTShang.PermissionManagement.HttpApi.csproj" />
+        <Project Path="src/TTShang.PermissionManagement.HttpApi.Client/TTShang.PermissionManagement.HttpApi.Client.csproj" />
+        <Project Path="src/TTShang.PermissionManagement.Blazor/TTShang.PermissionManagement.Blazor.csproj" />
+        <Project Path="src/TTShang.PermissionManagement.Blazor.Server/TTShang.PermissionManagement.Blazor.Server.csproj" />
+        <Project Path="src/TTShang.PermissionManagement.Installer/TTShang.PermissionManagement.Installer.csproj" />
+    </Folder>
+    
+    <Folder Name="/test/">
+        <Project Path="test/TTShang.PermissionManagement.TestBase/TTShang.PermissionManagement.TestBase.csproj" />
+        <Project Path="test/TTShang.PermissionManagement.EntityFrameworkCore.Tests/TTShang.PermissionManagement.EntityFrameworkCore.Tests.csproj" />
+        <Project Path="test/TTShang.PermissionManagement.Domain.Tests/TTShang.PermissionManagement.Domain.Tests.csproj" />
+        <Project Path="test/TTShang.PermissionManagement.Application.Tests/TTShang.PermissionManagement.Application.Tests.csproj" />
+    </Folder>
+</Solution>

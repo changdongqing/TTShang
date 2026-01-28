@@ -1,0 +1,66 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "TTShang.TenantManagement.Domain": {
+      "path": "src/TTShang.TenantManagement.Domain/TTShang.TenantManagement.Domain.abppkg",
+      "folder": "src"
+    },
+    "TTShang.TenantManagement.Application.Contracts": {
+      "path": "src/TTShang.TenantManagement.Application.Contracts/TTShang.TenantManagement.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "TTShang.TenantManagement.Application": {
+      "path": "src/TTShang.TenantManagement.Application/TTShang.TenantManagement.Application.abppkg",
+      "folder": "src"
+    },
+    "TTShang.TenantManagement.EntityFrameworkCore": {
+      "path": "src/TTShang.TenantManagement.EntityFrameworkCore/TTShang.TenantManagement.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "TTShang.TenantManagement.HttpApi": {
+      "path": "src/TTShang.TenantManagement.HttpApi/TTShang.TenantManagement.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "TTShang.TenantManagement.HttpApi.Client": {
+      "path": "src/TTShang.TenantManagement.HttpApi.Client/TTShang.TenantManagement.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "TTShang.TenantManagement.Blazor": {
+      "path": "src/TTShang.TenantManagement.Blazor/TTShang.TenantManagement.Blazor.abppkg",
+      "folder": "src"
+    },
+    "TTShang.TenantManagement.Blazor.Server": {
+      "path": "src/TTShang.TenantManagement.Blazor.Server/TTShang.TenantManagement.Blazor.Server.abppkg",
+      "folder": "src"
+    },
+    "TTShang.TenantManagement.TestBase": {
+      "path": "test/TTShang.TenantManagement.TestBase/TTShang.TenantManagement.TestBase.abppkg",
+      "folder": "test"
+    },
+    "TTShang.TenantManagement.EntityFrameworkCore.Tests": {
+      "path": "test/TTShang.TenantManagement.EntityFrameworkCore.Tests/TTShang.TenantManagement.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "TTShang.TenantManagement.Domain.Tests": {
+      "path": "test/TTShang.TenantManagement.Domain.Tests/TTShang.TenantManagement.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "TTShang.TenantManagement.Application.Tests": {
+      "path": "test/TTShang.TenantManagement.Application.Tests/TTShang.TenantManagement.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "TTShang.TenantManagement.Domain.Shared": {
+      "path": "src/TTShang.TenantManagement.Domain.Shared/TTShang.TenantManagement.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "TTShang.TenantManagement.Installer": {
+       "path": "src/TTShang.TenantManagement.Installer/TTShang.TenantManagement.Installer.abppkg",
+       "folder": "src"
+    }
+  }
+}

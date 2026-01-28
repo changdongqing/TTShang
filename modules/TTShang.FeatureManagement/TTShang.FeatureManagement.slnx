@@ -1,0 +1,25 @@
+<Solution>
+    <Configurations>
+        <Platform Name="Any CPU" />
+    </Configurations>
+
+    <Folder Name="/src/">
+        <Project Path="src/TTShang.FeatureManagement.Domain.Shared/TTShang.FeatureManagement.Domain.Shared.csproj" />
+        <Project Path="src/TTShang.FeatureManagement.Domain/TTShang.FeatureManagement.Domain.csproj" />
+        <Project Path="src/TTShang.FeatureManagement.Application.Contracts/TTShang.FeatureManagement.Application.Contracts.csproj" />
+        <Project Path="src/TTShang.FeatureManagement.Application/TTShang.FeatureManagement.Application.csproj" />
+        <Project Path="src/TTShang.FeatureManagement.EntityFrameworkCore/TTShang.FeatureManagement.EntityFrameworkCore.csproj" />
+        <Project Path="src/TTShang.FeatureManagement.HttpApi/TTShang.FeatureManagement.HttpApi.csproj" />
+        <Project Path="src/TTShang.FeatureManagement.HttpApi.Client/TTShang.FeatureManagement.HttpApi.Client.csproj" />
+        <Project Path="src/TTShang.FeatureManagement.Blazor/TTShang.FeatureManagement.Blazor.csproj" />
+        <Project Path="src/TTShang.FeatureManagement.Blazor.Server/TTShang.FeatureManagement.Blazor.Server.csproj" />
+        <Project Path="src/TTShang.FeatureManagement.Installer/TTShang.FeatureManagement.Installer.csproj" />
+    </Folder>
+    
+    <Folder Name="/test/">
+        <Project Path="test/TTShang.FeatureManagement.TestBase/TTShang.FeatureManagement.TestBase.csproj" />
+        <Project Path="test/TTShang.FeatureManagement.EntityFrameworkCore.Tests/TTShang.FeatureManagement.EntityFrameworkCore.Tests.csproj" />
+        <Project Path="test/TTShang.FeatureManagement.Domain.Tests/TTShang.FeatureManagement.Domain.Tests.csproj" />
+        <Project Path="test/TTShang.FeatureManagement.Application.Tests/TTShang.FeatureManagement.Application.Tests.csproj" />
+    </Folder>
+</Solution>

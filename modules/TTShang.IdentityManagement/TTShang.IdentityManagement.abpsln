@@ -1,0 +1,9 @@
+{
+  "id": "67829eae-ed37-46c6-bd74-3b8dc3c9e7c0",
+  "template": "empty",
+  "modules": {
+    "TTShang.IdentityManagement": {
+      "path": "TTShang.IdentityManagement.abpmdl"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+<Solution>
+    <Configurations>
+        <Platform Name="Any CPU" />
+    </Configurations>
+
+    <Folder Name="/src/">
+        <Project Path="src/TTShang.TenantManagement.Domain.Shared/TTShang.TenantManagement.Domain.Shared.csproj" />
+        <Project Path="src/TTShang.TenantManagement.Domain/TTShang.TenantManagement.Domain.csproj" />
+        <Project Path="src/TTShang.TenantManagement.Application.Contracts/TTShang.TenantManagement.Application.Contracts.csproj" />
+        <Project Path="src/TTShang.TenantManagement.Application/TTShang.TenantManagement.Application.csproj" />
+        <Project Path="src/TTShang.TenantManagement.EntityFrameworkCore/TTShang.TenantManagement.EntityFrameworkCore.csproj" />
+        <Project Path="src/TTShang.TenantManagement.HttpApi/TTShang.TenantManagement.HttpApi.csproj" />
+        <Project Path="src/TTShang.TenantManagement.HttpApi.Client/TTShang.TenantManagement.HttpApi.Client.csproj" />
+        <Project Path="src/TTShang.TenantManagement.Blazor/TTShang.TenantManagement.Blazor.csproj" />
+        <Project Path="src/TTShang.TenantManagement.Blazor.Server/TTShang.TenantManagement.Blazor.Server.csproj" />
+        <Project Path="src/TTShang.TenantManagement.Installer/TTShang.TenantManagement.Installer.csproj" />
+    </Folder>
+    
+    <Folder Name="/test/">
+        <Project Path="test/TTShang.TenantManagement.TestBase/TTShang.TenantManagement.TestBase.csproj" />
+        <Project Path="test/TTShang.TenantManagement.EntityFrameworkCore.Tests/TTShang.TenantManagement.EntityFrameworkCore.Tests.csproj" />
+        <Project Path="test/TTShang.TenantManagement.Domain.Tests/TTShang.TenantManagement.Domain.Tests.csproj" />
+        <Project Path="test/TTShang.TenantManagement.Application.Tests/TTShang.TenantManagement.Application.Tests.csproj" />
+    </Folder>
+</Solution>

@@ -1,0 +1,66 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {}
+    }
+  },
+  "packages": {
+    "TTShang.IdentityManagement.Domain": {
+      "path": "src/TTShang.IdentityManagement.Domain/TTShang.IdentityManagement.Domain.abppkg",
+      "folder": "src"
+    },
+    "TTShang.IdentityManagement.Application.Contracts": {
+      "path": "src/TTShang.IdentityManagement.Application.Contracts/TTShang.IdentityManagement.Application.Contracts.abppkg",
+      "folder": "src"
+    },
+    "TTShang.IdentityManagement.Application": {
+      "path": "src/TTShang.IdentityManagement.Application/TTShang.IdentityManagement.Application.abppkg",
+      "folder": "src"
+    },
+    "TTShang.IdentityManagement.EntityFrameworkCore": {
+      "path": "src/TTShang.IdentityManagement.EntityFrameworkCore/TTShang.IdentityManagement.EntityFrameworkCore.abppkg",
+      "folder": "src"
+    },
+    "TTShang.IdentityManagement.HttpApi": {
+      "path": "src/TTShang.IdentityManagement.HttpApi/TTShang.IdentityManagement.HttpApi.abppkg",
+      "folder": "src"
+    },
+    "TTShang.IdentityManagement.HttpApi.Client": {
+      "path": "src/TTShang.IdentityManagement.HttpApi.Client/TTShang.IdentityManagement.HttpApi.Client.abppkg",
+      "folder": "src"
+    },
+    "TTShang.IdentityManagement.Blazor": {
+      "path": "src/TTShang.IdentityManagement.Blazor/TTShang.IdentityManagement.Blazor.abppkg",
+      "folder": "src"
+    },
+    "TTShang.IdentityManagement.Blazor.Server": {
+      "path": "src/TTShang.IdentityManagement.Blazor.Server/TTShang.IdentityManagement.Blazor.Server.abppkg",
+      "folder": "src"
+    },
+    "TTShang.IdentityManagement.TestBase": {
+      "path": "test/TTShang.IdentityManagement.TestBase/TTShang.IdentityManagement.TestBase.abppkg",
+      "folder": "test"
+    },
+    "TTShang.IdentityManagement.EntityFrameworkCore.Tests": {
+      "path": "test/TTShang.IdentityManagement.EntityFrameworkCore.Tests/TTShang.IdentityManagement.EntityFrameworkCore.Tests.abppkg",
+      "folder": "test"
+    },
+    "TTShang.IdentityManagement.Domain.Tests": {
+      "path": "test/TTShang.IdentityManagement.Domain.Tests/TTShang.IdentityManagement.Domain.Tests.abppkg",
+      "folder": "test"
+    },
+    "TTShang.IdentityManagement.Application.Tests": {
+      "path": "test/TTShang.IdentityManagement.Application.Tests/TTShang.IdentityManagement.Application.Tests.abppkg",
+      "folder": "test"
+    },
+    "TTShang.IdentityManagement.Domain.Shared": {
+      "path": "src/TTShang.IdentityManagement.Domain.Shared/TTShang.IdentityManagement.Domain.Shared.abppkg",
+      "folder": "src"
+    },
+    "TTShang.IdentityManagement.Installer": {
+       "path": "src/TTShang.IdentityManagement.Installer/TTShang.IdentityManagement.Installer.abppkg",
+       "folder": "src"
+    }
+  }
+}

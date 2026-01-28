@@ -1,0 +1,25 @@
+<Solution>
+    <Configurations>
+        <Platform Name="Any CPU" />
+    </Configurations>
+
+    <Folder Name="/src/">
+        <Project Path="src/TTShang.IdentityManagement.Domain.Shared/TTShang.IdentityManagement.Domain.Shared.csproj" />
+        <Project Path="src/TTShang.IdentityManagement.Domain/TTShang.IdentityManagement.Domain.csproj" />
+        <Project Path="src/TTShang.IdentityManagement.Application.Contracts/TTShang.IdentityManagement.Application.Contracts.csproj" />
+        <Project Path="src/TTShang.IdentityManagement.Application/TTShang.IdentityManagement.Application.csproj" />
+        <Project Path="src/TTShang.IdentityManagement.EntityFrameworkCore/TTShang.IdentityManagement.EntityFrameworkCore.csproj" />
+        <Project Path="src/TTShang.IdentityManagement.HttpApi/TTShang.IdentityManagement.HttpApi.csproj" />
+        <Project Path="src/TTShang.IdentityManagement.HttpApi.Client/TTShang.IdentityManagement.HttpApi.Client.csproj" />
+        <Project Path="src/TTShang.IdentityManagement.Blazor/TTShang.IdentityManagement.Blazor.csproj" />
+        <Project Path="src/TTShang.IdentityManagement.Blazor.Server/TTShang.IdentityManagement.Blazor.Server.csproj" />
+        <Project Path="src/TTShang.IdentityManagement.Installer/TTShang.IdentityManagement.Installer.csproj" />
+    </Folder>
+    
+    <Folder Name="/test/">
+        <Project Path="test/TTShang.IdentityManagement.TestBase/TTShang.IdentityManagement.TestBase.csproj" />
+        <Project Path="test/TTShang.IdentityManagement.EntityFrameworkCore.Tests/TTShang.IdentityManagement.EntityFrameworkCore.Tests.csproj" />
+        <Project Path="test/TTShang.IdentityManagement.Domain.Tests/TTShang.IdentityManagement.Domain.Tests.csproj" />
+        <Project Path="test/TTShang.IdentityManagement.Application.Tests/TTShang.IdentityManagement.Application.Tests.csproj" />
+    </Folder>
+</Solution>

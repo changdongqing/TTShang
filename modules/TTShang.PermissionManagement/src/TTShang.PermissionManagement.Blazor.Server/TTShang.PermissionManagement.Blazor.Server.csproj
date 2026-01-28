@@ -8,10 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AspNetCore.Components.Server.Theming" Version="10.0.2" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.102">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\TTShang.AntDesignTheme\src\TTShang.AntDesignTheme.Blazor.Server\TTShang.AntDesignTheme.Blazor.Server.csproj" />
     <ProjectReference Include="..\TTShang.PermissionManagement.Blazor\TTShang.PermissionManagement.Blazor.csproj" />
   </ItemGroup>
 

@@ -1,7 +1,7 @@
 <Solution>
     <Folder Name="/.slnitems/">
-        <File Path="../TTShang.AntDesignUI/configureawait.props" />
         <File Path="common.props" />
+        <File Path="configureawait.props" />
         <File Path="Directory.DotSettings" />
         <File Path="NuGet.Config" />
     </Folder>
@@ -31,6 +31,7 @@
         <Project Path="modules/TTShang.TenantManagement/src/TTShang.TenantManagement.Blazor/TTShang.TenantManagement.Blazor.csproj" />
     </Folder>
     <Folder Name="/src/">
+        <Project Path="src/TTShang.AntDesignUI/TTShang.AntDesignUI.csproj" />
         <Project Path="src/TTShang.Application.Contracts/TTShang.Application.Contracts.csproj" />
         <Project Path="src/TTShang.Application/TTShang.Application.csproj" />
         <Project Path="src/TTShang.Blazor/TTShang.Blazor.csproj" />

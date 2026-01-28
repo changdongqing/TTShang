@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
 
-  <Import Project="..\..\common.props"/>
+  <Import Project="..\..\common.props" />
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -8,11 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.AspNetCore.Components.Server.Theming" Version="10.0.2"/>
+    <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="10.0.2" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.102">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Volo.Abp.AspNetCore.Components.Server" Version="10.0.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Bundling" Version="10.0.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Packages" Version="10.0.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TTShang.AntDesignTheme.Blazor\TTShang.AntDesignTheme.Blazor.csproj"/>
+    <ProjectReference Include="..\TTShang.AntDesignTheme.Blazor\TTShang.AntDesignTheme.Blazor.csproj" />
   </ItemGroup>
 
 </Project>

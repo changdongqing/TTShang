@@ -8,8 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.102">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application.Contracts" Version="10.0.2" />
+    <PackageReference Include="Volo.Abp.Features" Version="10.0.2" />
     <PackageReference Include="Volo.Abp.Mapperly" Version="10.0.2" />
-    <PackageReference Include="Volo.Abp.AspNetCore.Components.Web.Theming" Version="10.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\TTShang.AntDesignTheme\src\TTShang.AntDesignTheme.Blazor\TTShang.AntDesignTheme.Blazor.csproj" />
   </ItemGroup>
 
   <ItemGroup><!--<ProjectReference Include="..\TTShang.FeatureManagement.Application.Contracts\TTShang.FeatureManagement.Application.Contracts.csproj"/>-->

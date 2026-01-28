@@ -18,4 +18,11 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\src\TTShang.AntDesignUI\TTShang.AntDesignUI.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="ConfigureAwait.Fody" Version="3.3.2" />
+    <PackageReference Update="Fody" Version="6.9.3">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
 </Project>

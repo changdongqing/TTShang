@@ -73,8 +73,18 @@ public class BasicQueryToolbar : PageToolbar
 
     public BasicQueryToolbar()
     {
-        // Initialize with default buttons
+        // Don't initialize buttons in constructor to allow callbacks to be set first
+        // Users should call Build() after configuration or use fluent API which calls Build()
+    }
+
+    /// <summary>
+    /// Builds the toolbar with configured buttons. Call this after setting properties.
+    /// </summary>
+    public virtual BasicQueryToolbar Build()
+    {
+        Contributors.Clear();
         InitializeDefaultButtons();
+        return this;
     }
 
     /// <summary>
@@ -110,21 +120,29 @@ public class BasicQueryToolbar : PageToolbar
     }
 
     /// <summary>
-    /// Sets the callback for the Refresh button
+    /// Rebuilds the toolbar with current settings. Call this after changing button properties or visibility.
+    /// </summary>
+    public virtual BasicQueryToolbar Rebuild()
+    {
+        return Build();
+    }
+
+    /// <summary>
+    /// Sets the callback for the Refresh button and rebuilds the toolbar
     /// </summary>
     public BasicQueryToolbar WithRefreshCallback(Func<Task> callback)
     {
         OnRefresh = callback;
-        return this;
+        return Build();
     }
 
     /// <summary>
-    /// Sets the callback for the Export button
+    /// Sets the callback for the Export button and rebuilds the toolbar
     /// </summary>
     public BasicQueryToolbar WithExportCallback(Func<Task> callback)
     {
         OnExport = callback;
-        return this;
+        return Build();
     }
 
     /// <summary>
@@ -197,7 +215,7 @@ public class BasicQueryToolbar : PageToolbar
     }
 
     /// <summary>
-    /// Configures button visibility
+    /// Configures button visibility and rebuilds the toolbar
     /// </summary>
     public BasicQueryToolbar ConfigureButtonVisibility(
         bool? showRefresh = null,
@@ -208,6 +226,6 @@ public class BasicQueryToolbar : PageToolbar
         if (showExport.HasValue)
             ShowExportButton = showExport.Value;
 
-        return this;
+        return Build();
     }
 }

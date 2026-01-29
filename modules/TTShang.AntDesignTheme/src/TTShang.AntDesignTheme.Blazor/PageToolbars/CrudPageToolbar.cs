@@ -107,8 +107,18 @@ public class CrudPageToolbar<TEntityDto, TKey> : PageToolbar
 
     public CrudPageToolbar()
     {
-        // Initialize with default buttons
+        // Don't initialize buttons in constructor to allow callbacks to be set first
+        // Users should call Build() after configuration or use fluent API which calls Build()
+    }
+
+    /// <summary>
+    /// Builds the toolbar with configured buttons. Call this after setting properties.
+    /// </summary>
+    public virtual CrudPageToolbar<TEntityDto, TKey> Build()
+    {
+        Contributors.Clear();
         InitializeDefaultButtons();
+        return this;
     }
 
     /// <summary>
@@ -160,41 +170,40 @@ public class CrudPageToolbar<TEntityDto, TKey> : PageToolbar
     /// <summary>
     /// Rebuilds the toolbar with current settings. Call this after changing button properties or visibility.
     /// </summary>
-    public virtual void Rebuild()
+    public virtual CrudPageToolbar<TEntityDto, TKey> Rebuild()
     {
-        Contributors.Clear();
-        InitializeDefaultButtons();
+        return Build();
     }
 
     /// <summary>
-    /// Sets the callback for the Add Row button
+    /// Sets the callback for the Add Row button and rebuilds the toolbar
     /// </summary>
     public CrudPageToolbar<TEntityDto, TKey> WithAddRowCallback(Func<Task> callback)
     {
         OnAddRow = callback;
-        return this;
+        return Build();
     }
 
     /// <summary>
-    /// Sets the callback for the Delete Row button
+    /// Sets the callback for the Delete Row button and rebuilds the toolbar
     /// </summary>
     public CrudPageToolbar<TEntityDto, TKey> WithDeleteRowCallback(Func<Task> callback)
     {
         OnDeleteRow = callback;
-        return this;
+        return Build();
     }
 
     /// <summary>
-    /// Sets the callback for the Save button
+    /// Sets the callback for the Save button and rebuilds the toolbar
     /// </summary>
     public CrudPageToolbar<TEntityDto, TKey> WithSaveCallback(Func<Task> callback)
     {
         OnSave = callback;
-        return this;
+        return Build();
     }
 
     /// <summary>
-    /// Configures button visibility
+    /// Configures button visibility and rebuilds the toolbar
     /// </summary>
     public CrudPageToolbar<TEntityDto, TKey> ConfigureButtonVisibility(
         bool? showAddRow = null,
@@ -208,7 +217,6 @@ public class CrudPageToolbar<TEntityDto, TKey> : PageToolbar
         if (showSave.HasValue)
             ShowSaveButton = showSave.Value;
         
-        Rebuild();
-        return this;
+        return Build();
     }
 }

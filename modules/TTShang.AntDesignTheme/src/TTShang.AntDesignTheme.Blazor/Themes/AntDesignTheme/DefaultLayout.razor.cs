@@ -1,14 +1,28 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using AntDesign;
+using AntDesign.ProLayout;
 using TTShang.AntDesignTheme.Blazor.Settings;
 using Microsoft.AspNetCore.Components;
+using Volo.Abp.UI.Navigation;
+using Volo.Abp.Ui.Branding;
+using Volo.Abp.AspNetCore.Components.Web.Security;
 
 namespace TTShang.AntDesignTheme.Blazor.Themes.AntDesignTheme;
 
-public partial class DefaultLayout
+public partial class DefaultLayout : IDisposable
 {
     [Inject]
-    protected IAntDesignSettingsProvider AntDesignSettingsProvider { get; set; }
+    protected IAntDesignSettingsProvider AntDesignSettingsProvider { get; set; } = null!;
+
+    [Inject]
+    protected IMenuManager MenuManager { get; set; } = null!;
+
+    [Inject]
+    protected IBrandingProvider BrandingProvider { get; set; } = null!;
+
+    [Inject]
+    protected ApplicationConfigurationChangedService ApplicationConfigurationChangedService { get; set; } = null!;
 
     protected bool Collapsed { get; set; }
 
@@ -16,16 +30,20 @@ public partial class DefaultLayout
 
     protected MenuTheme MenuTheme { get; set; }
 
-    protected string HeaderClass { get; set; }
+    protected MenuDataItem[] MenuData { get; set; } = Array.Empty<MenuDataItem>();
 
-    protected SiderTheme SiderTheme { get; set; }
+    protected string? LogoUrl { get; set; }
 
-    protected string SiderStyle { get; set; } = "min-width:256px";
+    protected string? AppName { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         await SetLayout();
+        await LoadMenuAsync();
+        await LoadBrandingAsync();
+        
         AntDesignSettingsProvider.SettingChanged += OnSettingChanged;
+        ApplicationConfigurationChangedService.Changed += OnApplicationConfigurationChanged;
     }
 
     protected virtual async Task OnSettingChanged()
@@ -34,19 +52,39 @@ public partial class DefaultLayout
         await InvokeAsync(StateHasChanged);
     }
 
+    protected virtual async void OnApplicationConfigurationChanged()
+    {
+        await LoadMenuAsync();
+        await InvokeAsync(StateHasChanged);
+    }
+
     private async Task SetLayout()
     {
         MenuTheme = await AntDesignSettingsProvider.GetMenuThemeAsync();
         MenuPlacement = await AntDesignSettingsProvider.GetMenuPlacementAsync();
-
-        SiderTheme = MenuTheme  == MenuTheme.Light ? SiderTheme.Light : SiderTheme.Dark;
-        HeaderClass = MenuPlacement == MenuPlacement.Top ? "ant-design-header-top" : "ant-design-header-left";
-        HeaderClass = MenuTheme == MenuTheme.Light ? $"{HeaderClass} {HeaderClass}-light" : HeaderClass;
     }
 
-    protected virtual void OnCollapse()
+    private async Task LoadMenuAsync()
     {
-        Collapsed = !Collapsed;
-        SiderStyle = Collapsed ? "" : "min-width:256px";
+        var menu = await MenuManager.GetMainMenuAsync();
+        MenuData = MenuDataItemConverter.ConvertToMenuDataItems(menu);
+    }
+
+    private Task LoadBrandingAsync()
+    {
+        LogoUrl = BrandingProvider.LogoUrl?.TrimStart('/', '~');
+        AppName = BrandingProvider.AppName;
+        return Task.CompletedTask;
+    }
+
+    protected virtual void OnCollapse(bool collapsed)
+    {
+        Collapsed = collapsed;
+    }
+
+    public void Dispose()
+    {
+        AntDesignSettingsProvider.SettingChanged -= OnSettingChanged;
+        ApplicationConfigurationChangedService.Changed -= OnApplicationConfigurationChanged;
     }
 }

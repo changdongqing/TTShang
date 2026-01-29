@@ -25,51 +25,13 @@
             </SpaceItem> *@
         </Space>
     </HeaderContentRender>
-    @* <RightContentRender>
-        <TTShang.AntDesignTheme.Blazor.Components.RightContent />
-    </RightContentRender> *@
     <ChildContent>
-        <ReuseTabs>
-        
-        </ReuseTabs>
+        <ReuseTabs></ReuseTabs>
         @Body
     </ChildContent>
-    @* <FooterRender>
-        <FooterView Copyright="2021 Ant Design Blazor" ></FooterView>
-    </FooterRender> *@
+    <FooterRender ></FooterRender>
 </AntDesign.ProLayout.BasicLayout>
-
 <SettingDrawer />
-
-
-
-
-
-
-@* <BasicLayout
-    Logo="@LogoUrl"
-    Title="@AppName"
-    MenuData="MenuData"
-    Theme="@(MenuTheme == MenuTheme.Dark ? MenuTheme.Dark : MenuTheme.Light)"
-    Layout="@(MenuPlacement == MenuPlacement.Top ? AntDesign.ProLayout.Layout.Top : AntDesign.ProLayout.Layout.Side)"
-    @bind-Collapsed="Collapsed"
-    RightContentRender="@RightContentRender">
-    <PageAlert/>
-    <div class="ant-design-body-content">
-        <LayoutHook Name="@LayoutHooks.Body.First" Layout="@StandardLayouts.Application" />
-        @if (!Options.Value.EnableMultipleTabs)
-        {
-            @Body
-        }
-        else
-        {
-            <ReuseTabs Class="ant-design-body-reusetabs" TabPaneClass="ant-design-body-reusetabs-tabpane" Draggable></ReuseTabs>
-        }
-        <LayoutHook Name="@LayoutHooks.Body.Last" Layout="@StandardLayouts.Application" />
-    </div>
-    <DynamicLayoutComponent />
-    <UiPageProgress/>
-</BasicLayout> *@
 
 @code {
     bool collapsed;
@@ -79,6 +41,5 @@
     {
         collapsed = !collapsed;
     }
-    
 }
 

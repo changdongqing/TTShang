@@ -33,7 +33,7 @@ public static class MenuDataItemConverter
 
         var dataItem = new MenuDataItem
         {
-            Name = menuItem.Name,
+            Name = menuItem.DisplayName??menuItem.Name,
             Path = menuItem.Url?.TrimStart('/', '~'),
             Icon = menuItem.Icon,
             HideInMenu = false

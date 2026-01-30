@@ -61,14 +61,16 @@ app {
     overflow: hidden;
 }
 
-/* Toolbar section - fixed height */
+/* Toolbar section - fixed height with bottom margin */
 .toolbar-section {
     flex-shrink: 0;
+    margin-bottom: 10px;
 }
 
-/* Query section - fixed height */
+/* Query section - fixed height with bottom margin */
 .query-section {
     flex-shrink: 0;
+    margin-bottom: 10px;
 }
 
 /* Table section - adaptive height with internal scrolling */
@@ -112,6 +114,7 @@ app {
 
 .table-section .ant-table-body {
     flex: 1;
+    /* !important is needed to override AntDesign's default inline styles for table scrolling */
     overflow-y: auto !important;
 }
 

@@ -15,7 +15,7 @@
 
 <div class="user-management-container">
     @* Part 1: Breadcrumb and Toolbar - fixed height *@
-    <div class="toolbar-section" style="margin-bottom: 10px; flex-shrink: 0;">
+    <div class="toolbar-section">
         <Row>
             <Col Span="12">
                 <Breadcrumb>
@@ -50,7 +50,7 @@
     </div>
 
     @* Part 2: Query Section - fixed height *@
-    <div class="query-section" style="margin-bottom: 10px; flex-shrink: 0;">
+    <div class="query-section">
         <Card>
             <Form Model="@QueryModel" Layout="@FormLayout.Inline">
                 <FormItem Label="@L["DisplayName:UserName"].Value">
@@ -91,7 +91,7 @@
                RowKey="x => x.Id"
                @bind-SelectedRows="@SelectedRows"
                ScrollY="@TableScrollY"
-               ScrollX="1500"
+               ScrollX="@TableScrollX"
                Size="TableSize.Small"
                Bordered
                PaginationPosition="bottomRight"

@@ -50,8 +50,18 @@ public partial class UserManagement
     protected int PageSize = 10;
     protected int CurrentPage = 1;
     protected int TotalCount = 0;
-    // Use calc() to compute available height: viewport - header(48px) - tabs(~40px) - toolbar(~50px) - query(~120px) - margins(~40px) - pagination(~50px) - table header(~40px)
+    
+    /// <summary>
+    /// Table scroll height calculation: viewport minus fixed UI elements.
+    /// Components: header(48px) + tabs(~40px) + toolbar(~50px) + query(~120px) + margins(~40px) + pagination(~50px) + table header(~40px) = ~390px
+    /// </summary>
     protected string TableScrollY = "calc(100vh - 390px)";
+    
+    /// <summary>
+    /// Horizontal scroll width for the table based on sum of column widths.
+    /// Columns: Selection(60) + Index(60) + UserName(120) + Surname(100) + Name(100) + Email(180) + Phone(130) + Password(120) + IdNumber(180) + IsThirdParty(120) + IsActive(80) + LockoutEnabled(100) + Roles(200) ≈ 1550px, rounded to 1500px minimum.
+    /// </summary>
+    protected string TableScrollX = "1500";
 
     // Track changes
     protected List<UserEditableRow> AddedRows = new();

@@ -1,0 +1,173 @@
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+<Space Size="@("small")">
+    @if (HasCreatePermission && ShowAddButton)
+    {
+        <SpaceItem>
+            <Button Type="@ButtonType.Primary" OnClick="@OnAddClicked">
+                <Icon Type="plus" Theme="IconThemeType.Outline" Class="me-1"></Icon>
+                @AddButtonText
+            </Button>
+        </SpaceItem>
+    }
+    @if (HasDeletePermission && ShowDeleteButton)
+    {
+        <SpaceItem>
+            <Button Type="@ButtonType.Default" Danger OnClick="@OnDeleteClicked" Disabled="@DeleteDisabled">
+                <Icon Type="delete" Theme="IconThemeType.Outline" Class="me-1"></Icon>
+                @DeleteButtonText
+            </Button>
+        </SpaceItem>
+    }
+    @if ((HasCreatePermission || HasUpdatePermission) && ShowSaveButton)
+    {
+        <SpaceItem>
+            <Button Type="@ButtonType.Primary" OnClick="@OnSaveClicked" Disabled="@SaveDisabled">
+                <Icon Type="save" Theme="IconThemeType.Outline" Class="me-1"></Icon>
+                @SaveButtonText
+            </Button>
+        </SpaceItem>
+    }
+    @if (HasManagePermissionsPermission && ShowPermissionsButton)
+    {
+        <SpaceItem>
+            <Button Type="@ButtonType.Default" OnClick="@OnPermissionsClicked" Disabled="@PermissionsDisabled">
+                <Icon Type="lock" Theme="IconThemeType.Outline" Class="me-1"></Icon>
+                @PermissionsButtonText
+            </Button>
+        </SpaceItem>
+    }
+    @ChildContent
+</Space>
+
+@code {
+    [Parameter]
+    public string? AddButtonText { get; set; } = "Add";
+    
+    [Parameter]
+    public string? DeleteButtonText { get; set; } = "Delete";
+    
+    [Parameter]
+    public string? SaveButtonText { get; set; } = "Save";
+    
+    [Parameter]
+    public string? PermissionsButtonText { get; set; } = "Permissions";
+    
+    [Parameter]
+    public bool ShowAddButton { get; set; } = true;
+    
+    [Parameter]
+    public bool ShowDeleteButton { get; set; } = true;
+    
+    [Parameter]
+    public bool ShowSaveButton { get; set; } = true;
+    
+    [Parameter]
+    public bool ShowPermissionsButton { get; set; } = true;
+    
+    [Parameter]
+    public bool DeleteDisabled { get; set; }
+    
+    [Parameter]
+    public bool SaveDisabled { get; set; }
+    
+    [Parameter]
+    public bool PermissionsDisabled { get; set; }
+    
+    [Parameter]
+    public EventCallback OnAdd { get; set; }
+    
+    [Parameter]
+    public EventCallback OnDelete { get; set; }
+    
+    [Parameter]
+    public EventCallback OnSave { get; set; }
+    
+    [Parameter]
+    public EventCallback OnPermissions { get; set; }
+    
+    [Parameter]
+    public string? CreatePolicyName { get; set; }
+    
+    [Parameter]
+    public string? UpdatePolicyName { get; set; }
+    
+    [Parameter]
+    public string? DeletePolicyName { get; set; }
+    
+    [Parameter]
+    public string? ManagePermissionsPolicyName { get; set; }
+    
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+    
+    protected bool HasCreatePermission { get; set; }
+    protected bool HasUpdatePermission { get; set; }
+    protected bool HasDeletePermission { get; set; }
+    protected bool HasManagePermissionsPermission { get; set; }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        await SetPermissionsAsync();
+    }
+    
+    protected virtual async Task SetPermissionsAsync()
+    {
+        if (!string.IsNullOrEmpty(CreatePolicyName))
+        {
+            HasCreatePermission = await AuthorizationService.IsGrantedAsync(CreatePolicyName);
+        }
+        else
+        {
+            HasCreatePermission = true;
+        }
+
+        if (!string.IsNullOrEmpty(UpdatePolicyName))
+        {
+            HasUpdatePermission = await AuthorizationService.IsGrantedAsync(UpdatePolicyName);
+        }
+        else
+        {
+            HasUpdatePermission = true;
+        }
+
+        if (!string.IsNullOrEmpty(DeletePolicyName))
+        {
+            HasDeletePermission = await AuthorizationService.IsGrantedAsync(DeletePolicyName);
+        }
+        else
+        {
+            HasDeletePermission = true;
+        }
+
+        if (!string.IsNullOrEmpty(ManagePermissionsPolicyName))
+        {
+            HasManagePermissionsPermission = await AuthorizationService.IsGrantedAsync(ManagePermissionsPolicyName);
+        }
+        else
+        {
+            HasManagePermissionsPermission = true;
+        }
+    }
+    
+    private async Task OnAddClicked()
+    {
+        await OnAdd.InvokeAsync();
+    }
+    
+    private async Task OnDeleteClicked()
+    {
+        await OnDelete.InvokeAsync();
+    }
+    
+    private async Task OnSaveClicked()
+    {
+        await OnSave.InvokeAsync();
+    }
+    
+    private async Task OnPermissionsClicked()
+    {
+        await OnPermissions.InvokeAsync();
+    }
+}

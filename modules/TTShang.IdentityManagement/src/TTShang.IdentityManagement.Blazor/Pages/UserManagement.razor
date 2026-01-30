@@ -13,9 +13,9 @@
 @inherits Volo.Abp.AspNetCore.Components.AbpComponentBase
 @implements IReuseTabsPage
 
-<div class="user-management-container" style="display: flex; flex-direction: column; height: 100%; overflow: hidden;">
-    @* Part 1: Breadcrumb and Toolbar *@
-    <div class="toolbar-section" style="margin-bottom: 10px;">
+<div class="user-management-container">
+    @* Part 1: Breadcrumb and Toolbar - fixed height *@
+    <div class="toolbar-section">
         <Row>
             <Col Span="12">
                 <Breadcrumb>
@@ -49,8 +49,8 @@
         </Row>
     </div>
 
-    @* Part 2: Query Section *@
-    <div class="query-section" style="margin-bottom: 10px;">
+    @* Part 2: Query Section - fixed height *@
+    <div class="query-section">
         <Card>
             <Form Model="@QueryModel" Layout="@FormLayout.Inline">
                 <FormItem Label="@L["DisplayName:UserName"].Value">
@@ -82,8 +82,8 @@
         </Card>
     </div>
 
-    @* Part 3: Table with inline editing *@
-    <div class="table-section" style="flex: 1; overflow: hidden; display: flex; flex-direction: column; min-height:300px; height:100%;">
+    @* Part 3: Table with inline editing - adaptive height *@
+    <div class="table-section">
         <Table @ref="TableRef"
                TItem="UserEditableRow"
                DataSource="@EditableUsers"
@@ -91,16 +91,16 @@
                RowKey="x => x.Id"
                @bind-SelectedRows="@SelectedRows"
                ScrollY="@TableScrollY"
+               ScrollX="@TableScrollX"
                Size="TableSize.Small"
                Bordered
                PaginationPosition="bottomRight"
                PageSize="@PageSize"
                Total="@TotalCount"
                PageIndex="@CurrentPage"
-               OnChange="@OnTableChange"
-               Style="height: 100%;">
+               OnChange="@OnTableChange">
             <Selection  />
-            <Column TData="int" Title="@L["ÐòºÅ"].Value" Width="60" Fixed="@ColumnFixPlacement.Left">
+            <Column TData="int" Title="@L["ï¿½ï¿½ï¿½"].Value" Width="60" Fixed="@ColumnFixPlacement.Left">
                 @(EditableUsers.IndexOf(context) + 1 + (CurrentPage - 1) * PageSize)
             </Column>
             <Column TData="string" Title="@L["DisplayName:UserName"].Value" Width="120">

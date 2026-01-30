@@ -26,8 +26,14 @@
         </Space>
     </HeaderContentRender>
     <ChildContent>
-        <ReuseTabs></ReuseTabs>
-        @Body
+        <div class="layout-content-wrapper">
+            <div class="tabs-section">
+                <ReuseTabs></ReuseTabs>
+            </div>
+            <div class="body-section">
+                @Body
+            </div>
+        </div>
     </ChildContent>
     <FooterRender ></FooterRender>
 </AntDesign.ProLayout.BasicLayout>

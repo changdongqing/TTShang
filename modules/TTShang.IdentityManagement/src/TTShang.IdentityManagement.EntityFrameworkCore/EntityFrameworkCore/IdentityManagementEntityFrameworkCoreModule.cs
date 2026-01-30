@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.Identity.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 
 namespace TTShang.IdentityManagement.EntityFrameworkCore;
 
 [DependsOn(
     typeof(IdentityManagementDomainModule),
-    typeof(AbpEntityFrameworkCoreModule)
+    typeof(AbpIdentityEntityFrameworkCoreModule)
 )]
 public class IdentityManagementEntityFrameworkCoreModule : AbpModule
 {

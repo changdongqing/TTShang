@@ -1,17 +1,15 @@
 ﻿using Volo.Abp.Modularity;
 using Volo.Abp.Localization;
 using TTShang.IdentityManagement.Localization;
-using Volo.Abp.Domain;
+using Volo.Abp.Identity;
 using Volo.Abp.Localization.ExceptionHandling;
-using Volo.Abp.Validation;
 using Volo.Abp.Validation.Localization;
 using Volo.Abp.VirtualFileSystem;
 
 namespace TTShang.IdentityManagement;
 
 [DependsOn(
-    typeof(AbpValidationModule),
-    typeof(AbpDddDomainSharedModule)
+    typeof(AbpIdentityDomainSharedModule)
 )]
 public class IdentityManagementDomainSharedModule : AbpModule
 {

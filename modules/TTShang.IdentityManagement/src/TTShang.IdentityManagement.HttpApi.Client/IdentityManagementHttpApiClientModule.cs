@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Volo.Abp.Http.Client;
+using Volo.Abp.Identity;
 using Volo.Abp.Modularity;
 using Volo.Abp.VirtualFileSystem;
 
@@ -7,7 +7,7 @@ namespace TTShang.IdentityManagement;
 
 [DependsOn(
     typeof(IdentityManagementApplicationContractsModule),
-    typeof(AbpHttpClientModule))]
+    typeof(AbpIdentityHttpApiClientModule))]
 public class IdentityManagementHttpApiClientModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

@@ -14,7 +14,7 @@ using Volo.Abp.UI.Navigation;
 namespace TTShang.IdentityManagement.Blazor;
 
 [DependsOn(
-    typeof(AbpIdentityApplicationContractsModule),
+    typeof(IdentityManagementApplicationContractsModule),
     typeof(AbpMapperlyModule),
     typeof(AbpPermissionManagementBlazorAntDesignModule),
     typeof(AbpAspNetCoreComponentsWebAntDesignThemeModule),

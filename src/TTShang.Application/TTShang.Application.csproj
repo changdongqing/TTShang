@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TTShang.Domain\TTShang.Domain.csproj" />
     <ProjectReference Include="..\TTShang.Application.Contracts\TTShang.Application.Contracts.csproj" />
+    <ProjectReference Include="..\..\modules\TTShang.IdentityManagement\src\TTShang.IdentityManagement.Application\TTShang.IdentityManagement.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,7 +19,6 @@
     <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="10.0.2" />
     <PackageReference Include="Volo.Abp.SettingManagement.Application" Version="10.0.2" />
     <PackageReference Include="Volo.Abp.Account.Application" Version="10.0.2" />
-    <PackageReference Include="Volo.Abp.Identity.Application" Version="10.0.2" />
     <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="10.0.2" />
   </ItemGroup>
 

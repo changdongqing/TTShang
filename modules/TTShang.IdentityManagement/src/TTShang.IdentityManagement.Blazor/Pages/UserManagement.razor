@@ -1,4 +1,4 @@
-﻿@page "/identity/users"
+@page "/identity/users"
 @attribute [Authorize(IdentityPermissions.Users.Default)]
 @using TTShang.AntDesignTheme.Blazor
 @using Microsoft.AspNetCore.Authorization
@@ -6,131 +6,259 @@
 @using Microsoft.Extensions.Options
 @using Volo.Abp.Identity
 @using Volo.Abp.Identity.Localization
+@using Volo.Abp.Data
 @inject AbpBlazorMessageLocalizerHelper<IdentityResource> LH
-@inherits AbpCrudPageBase<IIdentityUserAppService, IdentityUserDto, Guid, GetIdentityUsersInput, IdentityUserCreateDto, IdentityUserUpdateDto>
+@inject IIdentityUserAppService UserAppService
+@inject IIdentityRoleAppService RoleAppService
+@inherits Volo.Abp.AspNetCore.Components.AbpComponentBase
 @implements IReuseTabsPage
-<AbpPageHeader Title="@L["Users"]" BreadcrumbItems="@BreadcrumbItems" Toolbar="@Toolbar" />
 
-<div class="page-content">
-    <AbpExtensibleDataGrid TItem="IdentityUserDto"
-                           Data="@Entities"
-                           OnChange="@OnDataGridReadAsync"
-                           TotalItems="@TotalCount"
-                           PageSize="@PageSize"
-                           CurrentPage="@CurrentPage"
-                           Columns="@UserManagementTableColumns">
-    </AbpExtensibleDataGrid>
+<div class="user-management-container" style="display: flex; flex-direction: column; height: 100%; overflow: hidden;">
+    @* Part 1: Breadcrumb and Toolbar *@
+    <div class="toolbar-section" style="margin-bottom: 10px;">
+        <Row>
+            <Col Span="12">
+                <Breadcrumb>
+                    <BreadcrumbItem Href="">
+                        <Icon Type="home"/>
+                    </BreadcrumbItem>
+                    <BreadcrumbItem>@L["Menu:IdentityManagement"]</BreadcrumbItem>
+                    <BreadcrumbItem>@L["Users"]</BreadcrumbItem>
+                </Breadcrumb>
+            </Col>
+            <Col Span="12">
+                <Row Justify="RowJustify.End">
+                    <CrudToolbar 
+                        AddButtonText="@L["NewUser"].Value"
+                        DeleteButtonText="@L["Delete"].Value"
+                        SaveButtonText="@L["Save"].Value"
+                        PermissionsButtonText="@L["Permissions"].Value"
+                        CreatePolicyName="@IdentityPermissions.Users.Create"
+                        UpdatePolicyName="@IdentityPermissions.Users.Update"
+                        DeletePolicyName="@IdentityPermissions.Users.Delete"
+                        ManagePermissionsPolicyName="@IdentityPermissions.Users.ManagePermissions"
+                        DeleteDisabled="@(!SelectedRows.Any())"
+                        SaveDisabled="@(!HasChanges)"
+                        PermissionsDisabled="@(SelectedRows.Count() != 1)"
+                        OnAdd="@AddNewRow"
+                        OnDelete="@DeleteSelectedRows"
+                        OnSave="@SaveAllChanges"
+                        OnPermissions="@OpenPermissionsModal" />
+                </Row>
+            </Col>
+        </Row>
+    </div>
+
+    @* Part 2: Query Section *@
+    <div class="query-section" style="margin-bottom: 10px;">
+        <Card>
+            <Form Model="@QueryModel" Layout="@FormLayout.Inline">
+                <FormItem Label="@L["DisplayName:UserName"].Value">
+                    <Input @bind-Value="@QueryUserName" Placeholder="@L["DisplayName:UserName"].Value" Style="width: 150px;" />
+                </FormItem>
+                <FormItem Label="@L["DisplayName:Email"].Value">
+                    <Input @bind-Value="@QueryEmail" Placeholder="@L["DisplayName:Email"].Value" Style="width: 180px;" />
+                </FormItem>
+                <FormItem Label="@L["DisplayName:PhoneNumber"].Value">
+                    <Input @bind-Value="@QueryPhoneNumber" Placeholder="@L["DisplayName:PhoneNumber"].Value" Style="width: 150px;" />
+                </FormItem>
+            </Form>
+            <div style="margin-top: 10px;">
+                <Space>
+                    <SpaceItem>
+                        <Button Type="@ButtonType.Primary" OnClick="@SearchAsync">
+                            <Icon Type="search" Theme="IconThemeType.Outline" Class="me-1"></Icon>
+                            @L["Query"]
+                        </Button>
+                    </SpaceItem>
+                    <SpaceItem>
+                        <Button Type="@ButtonType.Default" OnClick="@ToggleAdvancedQuery">
+                            <Icon Type="filter" Theme="IconThemeType.Outline" Class="me-1"></Icon>
+                            @L["AdvancedQuery"]
+                        </Button>
+                    </SpaceItem>
+                </Space>
+            </div>
+        </Card>
+    </div>
+
+    @* Part 3: Table with inline editing *@
+    <div class="table-section" style="flex: 1; overflow: hidden; display: flex; flex-direction: column;">
+        <Table @ref="TableRef"
+               TItem="UserEditableRow"
+               DataSource="@EditableUsers"
+               Loading="@Loading"
+               RowKey="x => x.Id"
+               @bind-SelectedRows="@SelectedRows"
+               ScrollX="100%"
+               ScrollY="@TableScrollY"
+               Size="TableSize.Small"
+               Bordered
+               PaginationPosition="bottomRight"
+               PageSize="@PageSize"
+               Total="@TotalCount"
+               PageIndex="@CurrentPage"
+               OnChange="@OnTableChange">
+            <Selection Type="@SelectionType.Checkbox" />
+            <Column TData="int" Title="@L["RowNumber"].Value" Width="60" Fixed="@ColumnFixPlacement.Left">
+                @(EditableUsers.IndexOf(context) + 1 + (CurrentPage - 1) * PageSize)
+            </Column>
+            <Column TData="string" Title="@L["DisplayName:UserName"].Value" Width="120">
+                @if (context.IsNew || context.IsEditing)
+                {
+                    <Input @bind-Value="@context.UserName" Size="@InputSize.Small" OnBlur="@(() => MarkAsModified(context))" />
+                }
+                else
+                {
+                    <span @ondblclick="@(() => StartEditing(context))">@context.UserName</span>
+                }
+            </Column>
+            <Column TData="string" Title="@L["DisplayName:Surname"].Value" Width="100">
+                @if (context.IsNew || context.IsEditing)
+                {
+                    <Input @bind-Value="@context.Surname" Size="@InputSize.Small" OnBlur="@(() => MarkAsModified(context))" />
+                }
+                else
+                {
+                    <span @ondblclick="@(() => StartEditing(context))">@context.Surname</span>
+                }
+            </Column>
+            <Column TData="string" Title="@L["DisplayName:Name"].Value" Width="100">
+                @if (context.IsNew || context.IsEditing)
+                {
+                    <Input @bind-Value="@context.Name" Size="@InputSize.Small" OnBlur="@(() => MarkAsModified(context))" />
+                }
+                else
+                {
+                    <span @ondblclick="@(() => StartEditing(context))">@context.Name</span>
+                }
+            </Column>
+            <Column TData="string" Title="@L["DisplayName:Email"].Value" Width="180">
+                @if (context.IsNew || context.IsEditing)
+                {
+                    <Input @bind-Value="@context.Email" Size="@InputSize.Small" OnBlur="@(() => MarkAsModified(context))" />
+                }
+                else
+                {
+                    <span @ondblclick="@(() => StartEditing(context))">@context.Email</span>
+                }
+            </Column>
+            <Column TData="string" Title="@L["DisplayName:PhoneNumber"].Value" Width="130">
+                @if (context.IsNew || context.IsEditing)
+                {
+                    <Input @bind-Value="@context.PhoneNumber" Size="@InputSize.Small" OnBlur="@(() => MarkAsModified(context))" />
+                }
+                else
+                {
+                    <span @ondblclick="@(() => StartEditing(context))">@context.PhoneNumber</span>
+                }
+            </Column>
+            <Column TData="string" Title="@L["DisplayName:Password"].Value" Width="120">
+                @if (context.IsNew || context.IsEditing)
+                {
+                    <InputPassword @bind-Value="@context.Password" Size="@InputSize.Small" OnBlur="@(() => MarkAsModified(context))" />
+                }
+                else
+                {
+                    <span @ondblclick="@(() => StartEditing(context))">******</span>
+                }
+            </Column>
+            <Column TData="string" Title="@L["IdNumber"].Value" Width="180">
+                @if (context.IsNew || context.IsEditing)
+                {
+                    <Input @bind-Value="@context.IdNumber" Size="@InputSize.Small" MaxLength="18" OnBlur="@(() => MarkAsModified(context))" />
+                }
+                else
+                {
+                    <span @ondblclick="@(() => StartEditing(context))">@context.IdNumber</span>
+                }
+            </Column>
+            <Column TData="bool" Title="@L["IsThirdPartyEmployee"].Value" Width="120">
+                @if (context.IsNew || context.IsEditing)
+                {
+                    <Select @bind-Value="@context.IsThirdPartyEmployee" 
+                            TItem="bool" 
+                            TItemValue="bool"
+                            OnSelectedItemChanged="@(item => MarkAsModified(context))"
+                            Style="width: 100%;">
+                        <SelectOptions>
+                            <SelectOption TItem="bool" TItemValue="bool" Value="true" Label="@L["Yes"].Value" />
+                            <SelectOption TItem="bool" TItemValue="bool" Value="false" Label="@L["No"].Value" />
+                        </SelectOptions>
+                    </Select>
+                }
+                else
+                {
+                    <span @ondblclick="@(() => StartEditing(context))">@(context.IsThirdPartyEmployee ? L["Yes"] : L["No"])</span>
+                }
+            </Column>
+            <Column TData="bool" Title="@L["DisplayName:IsActive"].Value" Width="80">
+                @if (context.IsNew || context.IsEditing)
+                {
+                    <Checkbox @bind-Value="@context.IsActive" OnChange="@(val => MarkAsModified(context))" />
+                }
+                else
+                {
+                    <span @ondblclick="@(() => StartEditing(context))">
+                        @if (context.IsActive)
+                        {
+                            <Icon Type="check" Theme="IconThemeType.Outline" Style="color: green;" />
+                        }
+                        else
+                        {
+                            <Icon Type="close" Theme="IconThemeType.Outline" Style="color: red;" />
+                        }
+                    </span>
+                }
+            </Column>
+            <Column TData="bool" Title="@L["DisplayName:LockoutEnabled"].Value" Width="100">
+                @if (context.IsNew || context.IsEditing)
+                {
+                    <Checkbox @bind-Value="@context.LockoutEnabled" OnChange="@(val => MarkAsModified(context))" />
+                }
+                else
+                {
+                    <span @ondblclick="@(() => StartEditing(context))">
+                        @if (context.LockoutEnabled)
+                        {
+                            <Icon Type="check" Theme="IconThemeType.Outline" Style="color: green;" />
+                        }
+                        else
+                        {
+                            <Icon Type="close" Theme="IconThemeType.Outline" Style="color: red;" />
+                        }
+                    </span>
+                }
+            </Column>
+            <Column TData="object" Title="@L["Roles"].Value" Width="200">
+                @if (context.IsNew || context.IsEditing)
+                {
+                    <Select Mode="@SelectMode.Multiple"
+                            @bind-Values="@context.RoleNames"
+                            TItem="string"
+                            TItemValue="string"
+                            OnSelectedItemsChanged="@(items => MarkAsModified(context))"
+                            Style="width: 100%;">
+                        <SelectOptions>
+                            @foreach (var role in AvailableRoles)
+                            {
+                                <SelectOption TItem="string" TItemValue="string" Value="@role.Name" Label="@role.Name" />
+                            }
+                        </SelectOptions>
+                    </Select>
+                }
+                else
+                {
+                    <span @ondblclick="@(() => StartEditing(context))">@string.Join(", ", context.RoleNames ?? Array.Empty<string>())</span>
+                }
+            </Column>
+        </Table>
+    </div>
 </div>
-
-@if (HasCreatePermission)
-{
-    <Modal @ref="CreateModal" Title="@L["NewUser"]" Visible="@CreateModalVisible" OnCancel="@CloseCreateModalAsync" OnOk="CreateEntityAsync">
-        <Form
-            @ref="@CreateFormRef"
-            Layout="@FormLayout.Vertical"
-            Model="@NewEntity">
-            @if (CreateModalVisible)
-            {
-                <Tabs>
-                    <TabPane Tab="@L["UserInformations"]">
-                        <FormItem Label="@L["DisplayName:UserName"]">
-                            <Input @bind-Value="@context.UserName"/>
-                        </FormItem>
-                        <FormItem Label="@L["DisplayName:Name"]">
-                            <Input @bind-Value="@context.Name"/>
-                        </FormItem>
-                        <FormItem Label="@L["DisplayName:Surname"]">
-                            <Input @bind-Value="@context.Surname"/>
-                        </FormItem>
-                        <FormItem Label="@L["DisplayName:Password"]">
-                            <InputPassword @bind-Value="@context.Password"/>
-                        </FormItem>
-                        <FormItem Label="@L["DisplayName:Email"]">
-                            <Input @bind-Value="@context.Email"/>
-                        </FormItem>
-                        <FormItem Label="@L["DisplayName:PhoneNumber"]">
-                            <Input @bind-Value="@context.PhoneNumber"/>
-                        </FormItem>
-                        <FormItem>
-                            <Checkbox @bind-Value="context.IsActive">@L["DisplayName:IsActive"]</Checkbox>
-                        </FormItem>
-                        <FormItem>
-                            <Checkbox @bind-Value="context.LockoutEnabled">@L["DisplayName:LockoutEnabled"]</Checkbox>
-                        </FormItem>
-                        <ExtensionProperties TEntityType="IdentityUserCreateDto" TResourceType="IdentityResource" Entity="@NewEntity" LH="@LH"/>
-                    </TabPane>
-
-                    <TabPane Tab="@L["Roles"]">
-                        @foreach (var role in NewUserRoles)
-                        {
-                            <FormItem WrapperColOffset="2">
-                                <Checkbox @bind-Value="role.IsAssigned">@role.Name</Checkbox>
-                            </FormItem>
-                        }
-                    </TabPane>
-                </Tabs>
-            }
-        </Form>
-    </Modal>
-}
-
-@if (HasUpdatePermission)
-{
-    <Modal @ref="EditModal" Title="@L["Edit"]" Visible="@EditModalVisible" OnCancel="@CloseEditModalAsync" OnOk="UpdateEntityAsync">
-        <Form
-            @ref="@EditFormRef"
-            Layout="@FormLayout.Vertical"
-            Model="@EditingEntity">
-            @if (EditModalVisible)
-            {
-                <Tabs>
-                    <TabPane Tab="@L["UserInformations"]">
-                        <FormItem Label="@L["DisplayName:UserName"]">
-                            <Input @bind-Value="@context.UserName"/>
-                        </FormItem>
-                        <FormItem Label="@L["DisplayName:Name"]">
-                            <Input @bind-Value="@context.Name"/>
-                        </FormItem>
-                        <FormItem Label="@L["DisplayName:Surname"]">
-                            <Input @bind-Value="@context.Surname"/>
-                        </FormItem>
-                        <FormItem Label="@L["DisplayName:Password"]">
-                            <InputPassword @bind-Value="@context.Password"/>
-                        </FormItem>
-                        <FormItem Label="@L["DisplayName:Email"]">
-                            <Input @bind-Value="@context.Email"/>
-                        </FormItem>
-                        <FormItem Label="@L["DisplayName:PhoneNumber"]">
-                            <Input @bind-Value="@context.PhoneNumber"/>
-                        </FormItem>
-                        <FormItem>
-                            <Checkbox @bind-Value="context.IsActive">@L["DisplayName:IsActive"]</Checkbox>
-                        </FormItem>
-                        <FormItem>
-                            <Checkbox @bind-Value="context.LockoutEnabled">@L["DisplayName:LockoutEnabled"]</Checkbox>
-                        </FormItem>
-                        <ExtensionProperties TEntityType="IdentityUserUpdateDto" TResourceType="IdentityResource" Entity="@EditingEntity" LH="@LH"/>
-
-                    </TabPane>
-
-                    <TabPane Tab="@L["Roles"]">
-                        @foreach (var role in EditUserRoles)
-                        {
-                            <FormItem WrapperColOffset="2">
-                                <Checkbox @bind-Value="role.IsAssigned">@role.Name</Checkbox>
-                            </FormItem>
-                        }
-                    </TabPane>
-                </Tabs>
-            }
-        </Form>
-    </Modal>
-}
-
 
 @if (HasManagePermissionsPermission)
 {
-    <PermissionManagementModal @ref="PermissionManagementModal"/>
+    <PermissionManagementModal @ref="PermissionManagementModal" />
 }
 
 @code {

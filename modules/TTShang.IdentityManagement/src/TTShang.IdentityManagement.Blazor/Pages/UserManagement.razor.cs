@@ -76,8 +76,8 @@ public partial class UserManagement
     {
         if (firstRender)
         {
-            // Calculate table height based on available space
-            TableScrollY = "calc(100vh - 350px)";
+            // Set table height to fill the parent container
+            TableScrollY = "100%";
             StateHasChanged();
         }
         await base.OnAfterRenderAsync(firstRender);
@@ -142,6 +142,8 @@ public partial class UserManagement
             var result = await UserAppService.GetListAsync(QueryModel);
             TotalCount = (int)result.TotalCount;
 
+            Console.WriteLine($"Loaded {result.Items.Count} users for page {CurrentPage}");
+
             EditableUsers = new List<UserEditableRow>();
             foreach (var user in result.Items)
             {
@@ -168,6 +170,8 @@ public partial class UserManagement
                 EditableUsers.Add(row);
             }
 
+            Console.WriteLine($"EditableUsers count: {EditableUsers.Count}");
+
             // Clear tracking lists
             AddedRows.Clear();
             ModifiedRows.Clear();
@@ -185,6 +189,7 @@ public partial class UserManagement
 
     protected async Task OnTableChange(QueryModel<UserEditableRow> queryModel)
     {
+        if (Loading) return;
         CurrentPage = queryModel.PageIndex;
         await LoadUsersAsync();
         await InvokeAsync(StateHasChanged);

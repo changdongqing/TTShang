@@ -26,8 +26,14 @@
         </Space>
     </HeaderContentRender>
     <ChildContent>
-        <ReuseTabs></ReuseTabs>
-        @Body
+        <div class="layout-content-wrapper" style="display: flex; flex-direction: column; height: 100%; overflow: hidden;">
+            <div class="tabs-section" style="flex-shrink: 0;">
+                <ReuseTabs></ReuseTabs>
+            </div>
+            <div class="body-section" style="flex: 1; overflow: hidden; display: flex; flex-direction: column;">
+                @Body
+            </div>
+        </div>
     </ChildContent>
     <FooterRender ></FooterRender>
 </AntDesign.ProLayout.BasicLayout>

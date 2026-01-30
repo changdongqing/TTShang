@@ -114,13 +114,14 @@
     
     protected virtual async Task SetPermissionsAsync()
     {
+        // Default to false for security (deny by default)
         if (!string.IsNullOrEmpty(CreatePolicyName))
         {
             HasCreatePermission = await AuthorizationService.IsGrantedAsync(CreatePolicyName);
         }
         else
         {
-            HasCreatePermission = true;
+            HasCreatePermission = false;
         }
 
         if (!string.IsNullOrEmpty(UpdatePolicyName))
@@ -129,7 +130,7 @@
         }
         else
         {
-            HasUpdatePermission = true;
+            HasUpdatePermission = false;
         }
 
         if (!string.IsNullOrEmpty(DeletePolicyName))
@@ -138,7 +139,7 @@
         }
         else
         {
-            HasDeletePermission = true;
+            HasDeletePermission = false;
         }
 
         if (!string.IsNullOrEmpty(ManagePermissionsPolicyName))
@@ -147,7 +148,7 @@
         }
         else
         {
-            HasManagePermissionsPermission = true;
+            HasManagePermissionsPermission = false;
         }
     }
     

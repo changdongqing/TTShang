@@ -190,25 +190,6 @@ public partial class UserManagement
         await InvokeAsync(StateHasChanged);
     }
 
-    protected void OnRowClick(RowData<UserEditableRow> rowData)
-    {
-        // Single click selects the row
-        var row = rowData.Data;
-        if (row != null && !row.IsDeleted)
-        {
-            var currentSelected = SelectedRows.ToList();
-            if (currentSelected.Contains(row))
-            {
-                currentSelected.Remove(row);
-            }
-            else
-            {
-                currentSelected.Add(row);
-            }
-            SelectedRows = currentSelected;
-        }
-    }
-
     protected void StartEditing(UserEditableRow row)
     {
         if (!row.IsNew && HasUpdatePermission)

@@ -90,7 +90,6 @@
                Loading="@Loading"
                RowKey="x => x.Id"
                @bind-SelectedRows="@SelectedRows"
-               OnRowClick="@OnRowClick"
                ScrollX="100%"
                ScrollY="@TableScrollY"
                Size="TableSize.Small"
@@ -180,6 +179,7 @@
                     <Select @bind-Value="@context.IsThirdPartyEmployee" 
                             TItem="bool" 
                             TItemValue="bool"
+                            OnSelectedItemChanged="@(item => MarkAsModified(context))"
                             Style="width: 100%;">
                         <SelectOptions>
                             <SelectOption TItem="bool" TItemValue="bool" Value="true" Label="@L["Yes"].Value" />
@@ -195,7 +195,7 @@
             <Column TData="bool" Title="@L["DisplayName:IsActive"].Value" Width="80">
                 @if (context.IsNew || context.IsEditing)
                 {
-                    <Checkbox @bind-Value="@context.IsActive" />
+                    <Checkbox @bind-Value="@context.IsActive" OnChange="@(val => MarkAsModified(context))" />
                 }
                 else
                 {
@@ -214,7 +214,7 @@
             <Column TData="bool" Title="@L["DisplayName:LockoutEnabled"].Value" Width="100">
                 @if (context.IsNew || context.IsEditing)
                 {
-                    <Checkbox @bind-Value="@context.LockoutEnabled" />
+                    <Checkbox @bind-Value="@context.LockoutEnabled" OnChange="@(val => MarkAsModified(context))" />
                 }
                 else
                 {
@@ -237,6 +237,7 @@
                             @bind-Values="@context.RoleNames"
                             TItem="string"
                             TItemValue="string"
+                            OnSelectedItemsChanged="@(items => MarkAsModified(context))"
                             Style="width: 100%;">
                         <SelectOptions>
                             @foreach (var role in AvailableRoles)

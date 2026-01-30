@@ -25,7 +25,7 @@ BEGIN
     END IF;
 END $$;
 
--- Create index for IdNumber if it doesn't exist
+-- Create index for IdNumber if it doesn't exist (useful for lookups by ID number)
 DO $$
 BEGIN
     IF NOT EXISTS (
@@ -36,13 +36,5 @@ BEGIN
     END IF;
 END $$;
 
--- Create index for IsThirdPartyEmployee if it doesn't exist
-DO $$
-BEGIN
-    IF NOT EXISTS (
-        SELECT 1 FROM pg_indexes 
-        WHERE tablename = 'AbpUsers' AND indexname = 'IX_AbpUsers_IsThirdPartyEmployee'
-    ) THEN
-        CREATE INDEX "IX_AbpUsers_IsThirdPartyEmployee" ON "AbpUsers" ("IsThirdPartyEmployee");
-    END IF;
-END $$;
+-- Note: Index on IsThirdPartyEmployee is omitted as boolean columns have low cardinality
+-- and don't benefit from indexing in most query patterns

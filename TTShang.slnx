@@ -15,8 +15,16 @@
         <Project Path="modules/TTShang.FeatureManagement/src/TTShang.FeatureManagement.Blazor/TTShang.FeatureManagement.Blazor.csproj" />
     </Folder>
     <Folder Name="/modules/TTShang.IdentityManagement/">
+        <Project Path="modules/TTShang.IdentityManagement/src/TTShang.IdentityManagement.Application.Contracts/TTShang.IdentityManagement.Application.Contracts.csproj" />
+        <Project Path="modules/TTShang.IdentityManagement/src/TTShang.IdentityManagement.Application/TTShang.IdentityManagement.Application.csproj" />
         <Project Path="modules/TTShang.IdentityManagement/src/TTShang.IdentityManagement.Blazor.Server/TTShang.IdentityManagement.Blazor.Server.csproj" />
         <Project Path="modules/TTShang.IdentityManagement/src/TTShang.IdentityManagement.Blazor/TTShang.IdentityManagement.Blazor.csproj" />
+        <Project Path="modules/TTShang.IdentityManagement/src/TTShang.IdentityManagement.Domain.Shared/TTShang.IdentityManagement.Domain.Shared.csproj" />
+        <Project Path="modules/TTShang.IdentityManagement/src/TTShang.IdentityManagement.Domain/TTShang.IdentityManagement.Domain.csproj" />
+        <Project Path="modules/TTShang.IdentityManagement/src/TTShang.IdentityManagement.EntityFrameworkCore/TTShang.IdentityManagement.EntityFrameworkCore.csproj" />
+        <Project Path="modules/TTShang.IdentityManagement/src/TTShang.IdentityManagement.HttpApi.Client/TTShang.IdentityManagement.HttpApi.Client.csproj" />
+        <Project Path="modules/TTShang.IdentityManagement/src/TTShang.IdentityManagement.HttpApi/TTShang.IdentityManagement.HttpApi.csproj" />
+        <Project Path="modules/TTShang.IdentityManagement/src/TTShang.IdentityManagement.Installer/TTShang.IdentityManagement.Installer.csproj" />
     </Folder>
     <Folder Name="/modules/TTShang.PermissionManagement/">
         <Project Path="modules/TTShang.PermissionManagement/src/TTShang.PermissionManagement.Blazor.Server/TTShang.PermissionManagement.Blazor.Server.csproj" />

@@ -48,6 +48,7 @@ public static class PageToolbarExtensions
         object icon = null,
         ButtonType color = ButtonType.Primary,
         bool disabled = false,
+        bool danger = false,
         int order = 0,
         string requiredPolicyName = null)
     {
@@ -57,6 +58,7 @@ public static class PageToolbarExtensions
                     { nameof(ToolbarButton.Color), color},
                     { nameof(ToolbarButton.Text), text},
                     { nameof(ToolbarButton.Disabled), disabled},
+                    { nameof(ToolbarButton.Danger), danger},
                     { nameof(ToolbarButton.Icon), icon},
                     { nameof(ToolbarButton.Clicked),clicked},
             },

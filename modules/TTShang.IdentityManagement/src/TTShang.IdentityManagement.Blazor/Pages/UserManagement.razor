@@ -1,6 +1,7 @@
 @page "/identity/users"
 @attribute [Authorize(IdentityPermissions.Users.Default)]
 @using TTShang.AntDesignTheme.Blazor
+@using TTShang.AntDesignTheme.Blazor.Components
 @using Microsoft.AspNetCore.Authorization
 @using TTShang.PermissionManagement.Blazor.Components
 @using Microsoft.Extensions.Options
@@ -28,22 +29,37 @@
             </Col>
             <Col Span="12">
                 <Row Justify="RowJustify.End">
-                    <CrudToolbar 
-                        AddButtonText="@L["NewUser"].Value"
-                        DeleteButtonText="@L["Delete"].Value"
-                        SaveButtonText="@L["Save"].Value"
-                        PermissionsButtonText="@L["Permissions"].Value"
-                        CreatePolicyName="@IdentityPermissions.Users.Create"
-                        UpdatePolicyName="@IdentityPermissions.Users.Update"
-                        DeletePolicyName="@IdentityPermissions.Users.Delete"
-                        ManagePermissionsPolicyName="@IdentityPermissions.Users.ManagePermissions"
-                        DeleteDisabled="@(!SelectedRows.Any())"
-                        SaveDisabled="@(!HasChanges)"
-                        PermissionsDisabled="@(SelectedRows.Count() != 1)"
-                        OnAdd="@AddNewRow"
-                        OnDelete="@DeleteSelectedRows"
-                        OnSave="@SaveAllChanges"
-                        OnPermissions="@OpenPermissionsModal" />
+                    <SingleTableToolbar TRow="UserEditableRow"
+                                        TCreateDto="IdentityUserCreateDto"
+                                        TUpdateDto="IdentityUserUpdateDto"
+                                        TKey="Guid"
+                                        Items="EditableUsers"
+                                        SelectedRows="SelectedRows"
+                                        SelectedRowsChanged="@(rows => SelectedRows = rows)"
+                                        NewRowFactory="CreateNewRow"
+                                        CreateAsync="UserAppService.CreateAsync"
+                                        UpdateAsync="UserAppService.UpdateAsync"
+                                        DeleteAsync="UserAppService.DeleteAsync"
+                                        CreatePolicyName="@IdentityPermissions.Users.Create"
+                                        UpdatePolicyName="@IdentityPermissions.Users.Update"
+                                        DeletePolicyName="@IdentityPermissions.Users.Delete"
+                                        AddButtonText="@L["NewUser"].Value"
+                                        DeleteButtonText="@L["Delete"].Value"
+                                        SaveButtonText="@L["Save"].Value"
+                                        LoadingChanged="@(value => Loading = value)"
+                                        OnSaved="OnChangesSavedAsync"
+                                        OnNoChanges="OnNoChangesAsync"
+                                        OnError="HandleErrorAsync">
+                        @if (HasManagePermissionsPermission)
+                        {
+                            <SpaceItem>
+                                <Button Type="@ButtonType.Default" OnClick="@OpenPermissionsModal" Disabled="@(SelectedRows.Count() != 1)">
+                                    <Icon Type="lock" Theme="IconThemeType.Outline" Class="me-1"></Icon>
+                                    @L["Permissions"]
+                                </Button>
+                            </SpaceItem>
+                        }
+                    </SingleTableToolbar>
                 </Row>
             </Col>
         </Row>

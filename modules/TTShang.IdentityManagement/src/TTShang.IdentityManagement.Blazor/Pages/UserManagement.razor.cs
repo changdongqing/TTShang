@@ -4,8 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AntDesign;
 using AntDesign.TableModels;
-using TTShang.AntDesignUI;
-using TTShang.AntDesignTheme.Blazor.PageToolbars;
+using TTShang.AntDesignTheme.Blazor.Components;
 using TTShang.PermissionManagement.Blazor.Components;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
@@ -35,9 +34,7 @@ public partial class UserManagement
     protected UserEditableRow? SelectedPermissionUser;
 
     protected bool HasManagePermissionsPermission { get; set; }
-    protected bool HasCreatePermission { get; set; }
     protected bool HasUpdatePermission { get; set; }
-    protected bool HasDeletePermission { get; set; }
 
     protected GetIdentityUsersInput QueryModel = new();
     
@@ -63,13 +60,6 @@ public partial class UserManagement
     /// </summary>
     protected string TableScrollX = "1500";
 
-    // Track changes
-    protected List<UserEditableRow> AddedRows = new();
-    protected List<UserEditableRow> ModifiedRows = new();
-    protected List<UserEditableRow> DeletedRows = new();
-
-    protected bool HasChanges => AddedRows.Any() || ModifiedRows.Any() || DeletedRows.Any();
-
     public UserManagement()
     {
         LocalizationResource = typeof(IdentityResource);
@@ -90,9 +80,7 @@ public partial class UserManagement
 
     protected virtual async Task SetPermissionsAsync()
     {
-        HasCreatePermission = await AuthorizationService.IsGrantedAsync(IdentityPermissions.Users.Create);
         HasUpdatePermission = await AuthorizationService.IsGrantedAsync(IdentityPermissions.Users.Update);
-        HasDeletePermission = await AuthorizationService.IsGrantedAsync(IdentityPermissions.Users.Delete);
         HasManagePermissionsPermission = await AuthorizationService.IsGrantedAsync(IdentityPermissions.Users.ManagePermissions);
     }
 
@@ -177,10 +165,6 @@ public partial class UserManagement
 
             Console.WriteLine($"EditableUsers count: {EditableUsers.Count}");
 
-            // Clear tracking lists
-            AddedRows.Clear();
-            ModifiedRows.Clear();
-            DeletedRows.Clear();
         }
         catch (Exception ex)
         {
@@ -214,10 +198,6 @@ public partial class UserManagement
         if (!row.IsNew && !row.IsModified)
         {
             row.IsModified = true;
-            if (!ModifiedRows.Contains(row))
-            {
-                ModifiedRows.Add(row);
-            }
             // Auto-select modified rows
             var currentSelected = SelectedRows.ToList();
             if (!currentSelected.Contains(row))
@@ -229,9 +209,9 @@ public partial class UserManagement
         StateHasChanged();
     }
 
-    protected void AddNewRow()
+    protected UserEditableRow CreateNewRow()
     {
-        var newRow = new UserEditableRow
+        return new UserEditableRow
         {
             Id = Guid.NewGuid(),
             UserName = string.Empty,
@@ -244,124 +224,17 @@ public partial class UserManagement
             IsDeleted = false,
             IsModified = false
         };
-
-        EditableUsers.Insert(0, newRow);
-        AddedRows.Add(newRow);
-
-        // Auto-select new rows
-        var currentSelected = SelectedRows.ToList();
-        currentSelected.Add(newRow);
-        SelectedRows = currentSelected;
-
-        StateHasChanged();
     }
 
-    protected void DeleteSelectedRows()
+    protected async Task OnChangesSavedAsync()
     {
-        foreach (var row in SelectedRows.ToList())
-        {
-            if (row.IsNew)
-            {
-                // Remove new rows completely
-                EditableUsers.Remove(row);
-                AddedRows.Remove(row);
-            }
-            else
-            {
-                // Mark existing rows as deleted
-                row.IsDeleted = true;
-                if (!DeletedRows.Contains(row))
-                {
-                    DeletedRows.Add(row);
-                }
-                // Remove from modified list if present
-                ModifiedRows.Remove(row);
-            }
-        }
-
-        SelectedRows = Array.Empty<UserEditableRow>();
-        StateHasChanged();
+        await NotificationService.Success(L["SaveSuccessful"]);
+        await LoadUsersAsync();
     }
 
-    protected async Task SaveAllChanges()
+    protected async Task OnNoChangesAsync()
     {
-        if (!HasChanges)
-        {
-            await NotificationService.Warn(L["NoChangesToSave"]);
-            return;
-        }
-
-        try
-        {
-            Loading = true;
-
-            // Process deletions
-            foreach (var row in DeletedRows.ToList())
-            {
-                await UserAppService.DeleteAsync(row.Id);
-            }
-
-            // Process new rows
-            foreach (var row in AddedRows.ToList())
-            {
-                var createDto = new IdentityUserCreateDto
-                {
-                    UserName = row.UserName ?? string.Empty,
-                    Name = row.Name,
-                    Surname = row.Surname,
-                    Email = row.Email ?? string.Empty,
-                    PhoneNumber = row.PhoneNumber,
-                    Password = row.Password ?? string.Empty,
-                    IsActive = row.IsActive,
-                    LockoutEnabled = row.LockoutEnabled,
-                    RoleNames = row.RoleNames?.ToArray() ?? Array.Empty<string>()
-                };
-                createDto.SetProperty("IdNumber", row.IdNumber ?? string.Empty);
-                createDto.SetProperty("IsThirdPartyEmployee", row.IsThirdPartyEmployee);
-
-                await UserAppService.CreateAsync(createDto);
-            }
-
-            // Process modifications
-            foreach (var row in ModifiedRows.ToList())
-            {
-                var updateDto = new IdentityUserUpdateDto
-                {
-                    UserName = row.UserName ?? string.Empty,
-                    Name = row.Name,
-                    Surname = row.Surname,
-                    Email = row.Email ?? string.Empty,
-                    PhoneNumber = row.PhoneNumber,
-                    IsActive = row.IsActive,
-                    LockoutEnabled = row.LockoutEnabled,
-                    RoleNames = row.RoleNames?.ToArray() ?? Array.Empty<string>(),
-                    ConcurrencyStamp = row.ConcurrencyStamp
-                };
-
-                // Only set password if provided
-                if (!string.IsNullOrWhiteSpace(row.Password))
-                {
-                    updateDto.Password = row.Password;
-                }
-
-                updateDto.SetProperty("IdNumber", row.IdNumber ?? string.Empty);
-                updateDto.SetProperty("IsThirdPartyEmployee", row.IsThirdPartyEmployee);
-
-                await UserAppService.UpdateAsync(row.Id, updateDto);
-            }
-
-            await NotificationService.Success(L["SaveSuccessful"]);
-            await LoadUsersAsync();
-        }
-        catch (Exception ex)
-        {
-            await HandleErrorAsync(ex);
-        }
-        finally
-        {
-            Loading = false;
-            await InvokeAsync(StateHasChanged);
-        }
+        await NotificationService.Warn(L["NoChangesToSave"]);
     }
 
     protected async Task OpenPermissionsModal()
@@ -384,7 +257,7 @@ public partial class UserManagement
     }
 }
 
-public class UserEditableRow
+public class UserEditableRow : ISingleTableEditableRow<IdentityUserCreateDto, IdentityUserUpdateDto, Guid>
 {
     public Guid Id { get; set; }
     public string? UserName { get; set; }
@@ -405,4 +278,48 @@ public class UserEditableRow
     public bool IsEditing { get; set; }
     public bool IsDeleted { get; set; }
     public bool IsModified { get; set; }
+
+    public IdentityUserCreateDto ToCreateDto()
+    {
+        var createDto = new IdentityUserCreateDto
+        {
+            UserName = UserName ?? string.Empty,
+            Name = Name,
+            Surname = Surname,
+            Email = Email ?? string.Empty,
+            PhoneNumber = PhoneNumber,
+            Password = Password ?? string.Empty,
+            IsActive = IsActive,
+            LockoutEnabled = LockoutEnabled,
+            RoleNames = RoleNames?.ToArray() ?? Array.Empty<string>()
+        };
+        createDto.SetProperty("IdNumber", IdNumber ?? string.Empty);
+        createDto.SetProperty("IsThirdPartyEmployee", IsThirdPartyEmployee);
+        return createDto;
+    }
+
+    public IdentityUserUpdateDto ToUpdateDto()
+    {
+        var updateDto = new IdentityUserUpdateDto
+        {
+            UserName = UserName ?? string.Empty,
+            Name = Name,
+            Surname = Surname,
+            Email = Email ?? string.Empty,
+            PhoneNumber = PhoneNumber,
+            IsActive = IsActive,
+            LockoutEnabled = LockoutEnabled,
+            RoleNames = RoleNames?.ToArray() ?? Array.Empty<string>(),
+            ConcurrencyStamp = ConcurrencyStamp
+        };
+
+        if (!string.IsNullOrWhiteSpace(Password))
+        {
+            updateDto.Password = Password;
+        }
+
+        updateDto.SetProperty("IdNumber", IdNumber ?? string.Empty);
+        updateDto.SetProperty("IsThirdPartyEmployee", IsThirdPartyEmployee);
+        return updateDto;
+    }
 }

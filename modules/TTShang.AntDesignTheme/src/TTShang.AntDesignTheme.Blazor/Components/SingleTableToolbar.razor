@@ -1,0 +1,262 @@
+@typeparam TRow where TRow : ISingleTableEditableRow<TCreateDto, TUpdateDto, TKey>
+@typeparam TCreateDto
+@typeparam TUpdateDto
+@typeparam TKey
+@using System
+@using System.Collections.Generic
+@using System.Linq
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+<Space Size="@("small")">
+    @if (HasCreatePermission && ShowAddButton)
+    {
+        <SpaceItem>
+            <Button Type="@ButtonType.Primary" OnClick="@OnAddClicked">
+                <Icon Type="plus" Theme="IconThemeType.Outline" Class="me-1"></Icon>
+                @AddButtonText
+            </Button>
+        </SpaceItem>
+    }
+    @if (HasDeletePermission && ShowDeleteButton)
+    {
+        <SpaceItem>
+            <Button Type="@ButtonType.Default" Danger OnClick="@OnDeleteClicked" Disabled="@DeleteDisabled">
+                <Icon Type="delete" Theme="IconThemeType.Outline" Class="me-1"></Icon>
+                @DeleteButtonText
+            </Button>
+        </SpaceItem>
+    }
+    @if ((HasCreatePermission || HasUpdatePermission) && ShowSaveButton)
+    {
+        <SpaceItem>
+            <Button Type="@ButtonType.Primary" OnClick="@OnSaveClicked" Disabled="@SaveDisabled">
+                <Icon Type="save" Theme="IconThemeType.Outline" Class="me-1"></Icon>
+                @SaveButtonText
+            </Button>
+        </SpaceItem>
+    }
+    @ChildContent
+</Space>
+
+@code {
+    [Parameter]
+    public string? AddButtonText { get; set; } = "Add";
+
+    [Parameter]
+    public string? DeleteButtonText { get; set; } = "Delete";
+
+    [Parameter]
+    public string? SaveButtonText { get; set; } = "Save";
+
+    [Parameter]
+    public bool ShowAddButton { get; set; } = true;
+
+    [Parameter]
+    public bool ShowDeleteButton { get; set; } = true;
+
+    [Parameter]
+    public bool ShowSaveButton { get; set; } = true;
+
+    [Parameter, EditorRequired]
+    public IList<TRow> Items { get; set; } = default!;
+
+    [Parameter]
+    public IEnumerable<TRow> SelectedRows { get; set; } = Array.Empty<TRow>();
+
+    [Parameter]
+    public EventCallback<IEnumerable<TRow>> SelectedRowsChanged { get; set; }
+
+    [Parameter, EditorRequired]
+    public Func<TRow> NewRowFactory { get; set; } = default!;
+
+    [Parameter, EditorRequired]
+    public Func<TCreateDto, Task> CreateAsync { get; set; } = default!;
+
+    [Parameter, EditorRequired]
+    public Func<TKey, TUpdateDto, Task> UpdateAsync { get; set; } = default!;
+
+    [Parameter, EditorRequired]
+    public Func<TKey, Task> DeleteAsync { get; set; } = default!;
+
+    [Parameter]
+    public EventCallback<bool> LoadingChanged { get; set; }
+
+    [Parameter]
+    public EventCallback OnSaved { get; set; }
+
+    [Parameter]
+    public EventCallback OnNoChanges { get; set; }
+
+    [Parameter]
+    public EventCallback<Exception> OnError { get; set; }
+
+    [Parameter]
+    public string? CreatePolicyName { get; set; }
+
+    [Parameter]
+    public string? UpdatePolicyName { get; set; }
+
+    [Parameter]
+    public string? DeletePolicyName { get; set; }
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    protected bool HasCreatePermission { get; set; }
+    protected bool HasUpdatePermission { get; set; }
+    protected bool HasDeletePermission { get; set; }
+
+    private bool IsSaving { get; set; }
+
+    private bool HasChanges => Items.Any(row => row.IsNew || row.IsModified || row.IsDeleted);
+
+    private bool DeleteDisabled => !SelectedRows.Any();
+
+    private bool SaveDisabled => !HasChanges || IsSaving;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await SetPermissionsAsync();
+    }
+
+    protected virtual async Task SetPermissionsAsync()
+    {
+        if (!string.IsNullOrEmpty(CreatePolicyName))
+        {
+            HasCreatePermission = await AuthorizationService.IsGrantedAsync(CreatePolicyName);
+        }
+
+        if (!string.IsNullOrEmpty(UpdatePolicyName))
+        {
+            HasUpdatePermission = await AuthorizationService.IsGrantedAsync(UpdatePolicyName);
+        }
+
+        if (!string.IsNullOrEmpty(DeletePolicyName))
+        {
+            HasDeletePermission = await AuthorizationService.IsGrantedAsync(DeletePolicyName);
+        }
+    }
+
+    private async Task OnAddClicked()
+    {
+        var newRow = NewRowFactory();
+        newRow.IsNew = true;
+        newRow.IsModified = false;
+        newRow.IsDeleted = false;
+        Items.Insert(0, newRow);
+
+        if (SelectedRowsChanged.HasDelegate)
+        {
+            var selected = SelectedRows.ToList();
+            selected.Add(newRow);
+            await SelectedRowsChanged.InvokeAsync(selected);
+        }
+    }
+
+    private async Task OnDeleteClicked()
+    {
+        var selected = SelectedRows.ToList();
+        if (!selected.Any())
+        {
+            return;
+        }
+
+        foreach (var row in selected)
+        {
+            if (row.IsNew)
+            {
+                Items.Remove(row);
+            }
+            else
+            {
+                row.IsDeleted = true;
+                row.IsModified = false;
+            }
+        }
+
+        if (SelectedRowsChanged.HasDelegate)
+        {
+            await SelectedRowsChanged.InvokeAsync(Array.Empty<TRow>());
+        }
+    }
+
+    private async Task OnSaveClicked()
+    {
+        if (!HasChanges)
+        {
+            if (OnNoChanges.HasDelegate)
+            {
+                await OnNoChanges.InvokeAsync();
+            }
+            return;
+        }
+
+        try
+        {
+            IsSaving = true;
+            if (LoadingChanged.HasDelegate)
+            {
+                await LoadingChanged.InvokeAsync(true);
+            }
+
+            var deletedRows = Items.Where(row => row.IsDeleted && !row.IsNew).ToList();
+            foreach (var row in deletedRows)
+            {
+                await DeleteAsync(row.Id);
+            }
+
+            var newRows = Items.Where(row => row.IsNew && !row.IsDeleted).ToList();
+            foreach (var row in newRows)
+            {
+                await CreateAsync(row.ToCreateDto());
+            }
+
+            var modifiedRows = Items.Where(row => row.IsModified && !row.IsNew && !row.IsDeleted).ToList();
+            foreach (var row in modifiedRows)
+            {
+                await UpdateAsync(row.Id, row.ToUpdateDto());
+            }
+
+            if (OnSaved.HasDelegate)
+            {
+                await OnSaved.InvokeAsync();
+            }
+            else
+            {
+                ClearChangeFlags();
+            }
+        }
+        catch (Exception ex)
+        {
+            if (OnError.HasDelegate)
+            {
+                await OnError.InvokeAsync(ex);
+            }
+        }
+        finally
+        {
+            IsSaving = false;
+            if (LoadingChanged.HasDelegate)
+            {
+                await LoadingChanged.InvokeAsync(false);
+            }
+        }
+    }
+
+    private void ClearChangeFlags()
+    {
+        var deletedRows = Items.Where(row => row.IsDeleted).ToList();
+        foreach (var row in deletedRows)
+        {
+            Items.Remove(row);
+        }
+
+        foreach (var row in Items)
+        {
+            row.IsNew = false;
+            row.IsModified = false;
+            row.IsDeleted = false;
+        }
+    }
+}

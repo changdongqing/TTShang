@@ -29,6 +29,8 @@ app {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    position: relative;
+    margin: 0px 10px 0px 10px;
 }
 
 /* Layout wrapper for tabs and body */

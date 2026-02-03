@@ -1,16 +1,11 @@
 ﻿using System.Threading.Tasks;
 using TTShang.Localization;
-using TTShang.Permissions;
 using TTShang.MultiTenancy;
-using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.UI.Navigation;
 using TTShang.TenantManagement.Blazor;
 using TTShang.IdentityManagement.Blazor;
 using TTShang.SettingManagement.Blazor;
 using AntDesign;
-//using Volo.Abp.SettingManagement.Blazor.Menus;
-//using Volo.Abp.TenantManagement.Blazor.Navigation;
-//using Volo.Abp.Identity.Blazor;
 
 namespace TTShang.Blazor.Menus;
 

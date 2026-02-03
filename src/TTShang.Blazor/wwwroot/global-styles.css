@@ -16,12 +16,3 @@
     right: 0.75rem;
     top: 0.5rem;
 }
-
-:root {
-    --lpx-logo: url('/images/logo/leptonxlite/logo-light-thumbnail.png');
-    --lpx-logo-icon: url('/images/logo/leptonxlite/logo-light-thumbnail.png');
-}
-:root .abp-account-layout .lpx-brand-logo{
-    --lpx-logo: url('/images/logo/leptonxlite/logo-dark-thumbnail.png');
-    background-position: left;
-}

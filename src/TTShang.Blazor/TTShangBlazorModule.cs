@@ -1,6 +1,3 @@
-//using Blazorise;
-//using Blazorise.Bootstrap5;
-//using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
@@ -15,7 +12,6 @@ using OpenIddict.Server.AspNetCore;
 using OpenIddict.Validation.AspNetCore;
 using System;
 using System.IO;
-using System.Security.Cryptography.X509Certificates;
 using TTShang.AntDesignTheme.Blazor.Routing;
 using TTShang.AntDesignTheme.Blazor.Server;
 using TTShang.AntDesignTheme.Blazor.Server.Bundling;
@@ -33,26 +29,17 @@ using Volo.Abp;
 using Volo.Abp.Account.Web;
 using Volo.Abp.AspNetCore.Components.Server;
 using Volo.Abp.AspNetCore.Components.Web;
-//using Volo.Abp.AspNetCore.Components.Web.Theming.Routing;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.Localization;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
-//using Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme;
-//using Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
-using Volo.Abp.Identity;
 using Volo.Abp.Localization;
-using Volo.Abp.Mapperly;
 using Volo.Abp.Modularity;
 using Volo.Abp.OpenIddict;
-//using Volo.Abp.Identity.Blazor.Server;
-//using Volo.Abp.TenantManagement.Blazor.Server;
-//using Volo.Abp.SettingManagement.Blazor.Server;
-//using Volo.Abp.FeatureManagement.Blazor.Server;
 using Volo.Abp.Security.Claims;
 using Volo.Abp.Studio;
 using Volo.Abp.Studio.Client.AspNetCore;
@@ -166,7 +153,6 @@ public class TTShangBlazorModule : AbpModule
         ConfigureVirtualFileSystem(hostingEnvironment);
         ConfigureSwaggerServices(context.Services);
         ConfigureAutoApiControllers();
-        //ConfigureBlazorise(context);
         ConfigureRouter(context);
         ConfigureMenu(context);
     }
@@ -263,19 +249,6 @@ public class TTShangBlazorModule : AbpModule
             }
         );
     }
-
-
-    //private void ConfigureBlazorise(ServiceConfigurationContext context)
-    //{
-    //    context.Services
-    //        .AddBlazorise(options =>
-    //        {
-    //            // TODO (IMPORTANT): To use Blazorise, you need a license key. Get your license key directly from Blazorise, follow  the instructions at https://abp.io/faq#how-to-get-blazorise-license-key
-    //            //options.ProductToken = "Your Product Token";
-    //        })
-    //        .AddBootstrap5Providers()
-    //        .AddFontAwesomeIcons();
-    //}
 
     private void ConfigureMenu(ServiceConfigurationContext context)
     {

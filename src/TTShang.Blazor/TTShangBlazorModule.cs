@@ -12,6 +12,7 @@ using OpenIddict.Server.AspNetCore;
 using OpenIddict.Validation.AspNetCore;
 using System;
 using System.IO;
+using TTShang.AccountManagement.Blazor.Server;
 using TTShang.AntDesignTheme.Blazor.Routing;
 using TTShang.AntDesignTheme.Blazor.Server;
 using TTShang.AntDesignTheme.Blazor.Server.Bundling;
@@ -60,6 +61,7 @@ namespace TTShang.Blazor;
     typeof(AbpIdentityBlazorServerAntDesignModule),
     typeof(AbpTenantManagementBlazorServerAntDesignModule),
     typeof(AbpAccountWebOpenIddictModule),
+    typeof(AbpAccountBlazorServerAntDesignModule),
     typeof(AbpAspNetCoreComponentsServerAntDesignThemeModule),
     typeof(AbpAspNetCoreMvcUiLeptonXLiteThemeModule),
     typeof(AbpAspNetCoreSerilogModule),

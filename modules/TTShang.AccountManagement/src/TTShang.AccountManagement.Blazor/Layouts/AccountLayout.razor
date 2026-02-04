@@ -1,0 +1,24 @@
+@inherits LayoutComponentBase
+@using AntDesign
+
+<div class="account-layout">
+    <div class="account-layout-container">
+        @Body
+    </div>
+</div>
+
+<style>
+    .account-layout {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+    
+    .account-layout-container {
+        width: 100%;
+        max-width: 400px;
+    }
+</style>

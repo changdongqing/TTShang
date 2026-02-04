@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\modules\TTShang.AccountManagement\src\TTShang.AccountManagement.Blazor.Server\TTShang.AccountManagement.Blazor.Server.csproj" />
     <ProjectReference Include="..\..\modules\TTShang.AntDesignTheme\src\TTShang.AntDesignTheme.Blazor.Server\TTShang.AntDesignTheme.Blazor.Server.csproj" />
     <ProjectReference Include="..\..\modules\TTShang.FeatureManagement\src\TTShang.FeatureManagement.Blazor.Server\TTShang.FeatureManagement.Blazor.Server.csproj" />
     <ProjectReference Include="..\..\modules\TTShang.IdentityManagement\src\TTShang.IdentityManagement.Blazor.Server\TTShang.IdentityManagement.Blazor.Server.csproj" />

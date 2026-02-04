@@ -1,0 +1,75 @@
+@page "/account/logout"
+@attribute [Authorize]
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@using AntDesign
+@using TTShang.AccountManagement.Blazor.Layouts
+@layout AccountLayout
+@inject NavigationManager Navigation
+@inject IBlazorLoginService LoginService
+@inherits Volo.Abp.AspNetCore.Components.AbpComponentBase
+
+<div class="logout-card">
+    <Card>
+        <div class="logout-content">
+            <Spin Spinning="@IsLoading">
+                <div class="logout-message">
+                    <Icon Type="logout" Style="font-size: 48px; color: #1890ff; margin-bottom: 16px;"></Icon>
+                    <Title Level="4">@L["LoggingOut"]</Title>
+                    <Text Type="@TextElementType.Secondary">@L["PleaseWait"]</Text>
+                </div>
+            </Spin>
+        </div>
+    </Card>
+</div>
+
+@code {
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "returnUrl")]
+    public string? ReturnUrl { get; set; }
+
+    protected bool IsLoading { get; set; } = true;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await PerformLogoutAsync();
+        }
+    }
+
+    protected virtual async Task PerformLogoutAsync()
+    {
+        try
+        {
+            await LoginService.LogoutAsync();
+        }
+        catch
+        {
+            // Silently ignore logout errors and redirect anyway
+        }
+        finally
+        {
+            IsLoading = false;
+            var targetUrl = string.IsNullOrWhiteSpace(ReturnUrl) ? "/" : ReturnUrl;
+            Navigation.NavigateTo(targetUrl, forceLoad: true);
+        }
+    }
+}
+
+<style>
+    .logout-card {
+        width: 100%;
+    }
+    
+    .logout-content {
+        text-align: center;
+        padding: 48px 24px;
+    }
+    
+    .logout-message {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+</style>

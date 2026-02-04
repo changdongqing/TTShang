@@ -45,13 +45,13 @@ public class BlazorLoginService : IBlazorLoginService, ITransientDependency
 
             if (result.Succeeded)
             {
-                Logger.LogInformation("User {UserName} logged in successfully.", userNameOrEmailAddress);
+                Logger.LogInformation("User logged in successfully.");
                 return BlazorLoginResult.Succeeded();
             }
 
             if (result.IsLockedOut)
             {
-                Logger.LogWarning("User {UserName} is locked out.", userNameOrEmailAddress);
+                Logger.LogWarning("User account is locked out.");
                 return BlazorLoginResult.LockedOut(Localizer["UserLockedOutMessage"]);
             }
 
@@ -65,12 +65,12 @@ public class BlazorLoginService : IBlazorLoginService, ITransientDependency
                 return BlazorLoginResult.TwoFactorRequired(Localizer["RequiresTwoFactor"]);
             }
 
-            Logger.LogWarning("Failed login attempt for user {UserName}.", userNameOrEmailAddress);
+            Logger.LogWarning("Failed login attempt.");
             return BlazorLoginResult.Failed(Localizer["InvalidUserNameOrPassword"]);
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, "Login error for user {UserName}", userNameOrEmailAddress);
+            Logger.LogError(ex, "Login error occurred.");
             return BlazorLoginResult.Failed(Localizer["InvalidUserNameOrPassword"]);
         }
     }

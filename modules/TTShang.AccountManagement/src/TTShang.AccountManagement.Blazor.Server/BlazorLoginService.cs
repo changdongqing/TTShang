@@ -16,15 +16,18 @@ namespace TTShang.AccountManagement.Blazor.Server;
 public class BlazorLoginService : IBlazorLoginService, ITransientDependency
 {
     protected SignInManager<IdentityUser> SignInManager { get; }
+    protected UserManager<IdentityUser> UserManager { get; }
     protected ILogger<BlazorLoginService> Logger { get; }
     protected IStringLocalizer<AccountResource> Localizer { get; }
 
     public BlazorLoginService(
         SignInManager<IdentityUser> signInManager,
+        UserManager<IdentityUser> userManager,
         ILogger<BlazorLoginService> logger,
         IStringLocalizer<AccountResource> localizer)
     {
         SignInManager = signInManager;
+        UserManager = userManager;
         Logger = logger;
         Localizer = localizer;
     }
@@ -36,8 +39,22 @@ public class BlazorLoginService : IBlazorLoginService, ITransientDependency
     {
         try
         {
+            // First, resolve the user by username or email
+            var user = await UserManager.FindByNameAsync(userNameOrEmailAddress);
+            if (user == null)
+            {
+                user = await UserManager.FindByEmailAsync(userNameOrEmailAddress);
+            }
+
+            if (user == null)
+            {
+                Logger.LogDebug("User login failed - invalid credentials");
+                return BlazorLoginResult.Failed(Localizer["InvalidUserNameOrPassword"]);
+            }
+
+            // Use the resolved username for sign-in
             var result = await SignInManager.PasswordSignInAsync(
-                userNameOrEmailAddress,
+                user.UserName,
                 password,
                 rememberMe,
                 lockoutOnFailure: true

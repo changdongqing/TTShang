@@ -1,0 +1,83 @@
+using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Logging;
+using TTShang.AccountManagement.Blazor;
+using Volo.Abp.Account.Localization;
+using Volo.Abp.DependencyInjection;
+using IdentityUser = Volo.Abp.Identity.IdentityUser;
+
+namespace TTShang.AccountManagement.Blazor.Server;
+
+/// <summary>
+/// Server-side implementation of the Blazor login service using ASP.NET Core Identity
+/// </summary>
+public class BlazorLoginService : IBlazorLoginService, ITransientDependency
+{
+    protected SignInManager<IdentityUser> SignInManager { get; }
+    protected ILogger<BlazorLoginService> Logger { get; }
+    protected IStringLocalizer<AccountResource> Localizer { get; }
+
+    public BlazorLoginService(
+        SignInManager<IdentityUser> signInManager,
+        ILogger<BlazorLoginService> logger,
+        IStringLocalizer<AccountResource> localizer)
+    {
+        SignInManager = signInManager;
+        Logger = logger;
+        Localizer = localizer;
+    }
+
+    public virtual async Task<BlazorLoginResult> LoginAsync(
+        string userNameOrEmailAddress,
+        string password,
+        bool rememberMe)
+    {
+        try
+        {
+            var result = await SignInManager.PasswordSignInAsync(
+                userNameOrEmailAddress,
+                password,
+                rememberMe,
+                lockoutOnFailure: true
+            );
+
+            if (result.Succeeded)
+            {
+                Logger.LogInformation("User {UserName} logged in successfully.", userNameOrEmailAddress);
+                return BlazorLoginResult.Succeeded();
+            }
+
+            if (result.IsLockedOut)
+            {
+                Logger.LogWarning("User {UserName} is locked out.", userNameOrEmailAddress);
+                return BlazorLoginResult.LockedOut(Localizer["UserLockedOutMessage"]);
+            }
+
+            if (result.IsNotAllowed)
+            {
+                return BlazorLoginResult.NotAllowed(Localizer["LoginIsNotAllowed"]);
+            }
+
+            if (result.RequiresTwoFactor)
+            {
+                return BlazorLoginResult.TwoFactorRequired(Localizer["RequiresTwoFactor"]);
+            }
+
+            Logger.LogWarning("Failed login attempt for user {UserName}.", userNameOrEmailAddress);
+            return BlazorLoginResult.Failed(Localizer["InvalidUserNameOrPassword"]);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Login error for user {UserName}", userNameOrEmailAddress);
+            return BlazorLoginResult.Failed(Localizer["InvalidUserNameOrPassword"]);
+        }
+    }
+
+    public virtual async Task LogoutAsync()
+    {
+        await SignInManager.SignOutAsync();
+        Logger.LogInformation("User logged out.");
+    }
+}

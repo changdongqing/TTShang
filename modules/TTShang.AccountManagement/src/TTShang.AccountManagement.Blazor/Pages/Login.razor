@@ -1,0 +1,211 @@
+@page "/account/login"
+@attribute [AllowAnonymous]
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.Extensions.Localization
+@using Microsoft.Extensions.Logging
+@using global::Localization.Resources.AbpUi
+@using Volo.Abp.Account.Localization
+@using AntDesign
+@using TTShang.AccountManagement.Blazor.Layouts
+@layout AccountLayout
+@inject NavigationManager Navigation
+@inherits Volo.Abp.AspNetCore.Components.AbpComponentBase
+
+<div class="login-card">
+    <Card>
+        <div class="login-header">
+            <div class="login-logo">
+                <img src="_content/TTShang.AntDesignTheme.Blazor/images/logo.svg" alt="Logo" onerror="this.style.display='none'" />
+            </div>
+            <Title Level="3">@L["Login"]</Title>
+            <Text Type="@TextElementType.Secondary">@L["WelcomeMessage"]</Text>
+        </div>
+
+        <Form Model="@LoginInput"
+              OnFinish="OnLoginAsync"
+              Loading="@IsLoading"
+              LabelCol="new ColLayoutParam { Span = 24 }"
+              WrapperCol="new ColLayoutParam { Span = 24 }"
+              Layout="@FormLayout.Vertical">
+
+            @if (!string.IsNullOrEmpty(ErrorMessage))
+            {
+                <Alert Type="@AlertType.Error" 
+                       Message="@ErrorMessage" 
+                       ShowIcon="true" 
+                       Closable="true"
+                       OnClose="() => ErrorMessage = string.Empty"
+                       Style="margin-bottom: 16px;" />
+            }
+
+            <FormItem Label="@L["DisplayName:UserNameOrEmailAddress"]">
+                <Input @bind-Value="@LoginInput.UserNameOrEmailAddress"
+                       Placeholder="@L["DisplayName:UserNameOrEmailAddress"]"
+                       Size="@InputSize.Large"
+                       Prefix="@prefixUserIcon" />
+            </FormItem>
+
+            <FormItem Label="@L["DisplayName:Password"]">
+                <InputPassword @bind-Value="@LoginInput.Password"
+                               Placeholder="@L["DisplayName:Password"]"
+                               Size="@InputSize.Large"
+                               Prefix="@prefixPasswordIcon" />
+            </FormItem>
+
+            <FormItem>
+                <div class="login-options">
+                    <Checkbox @bind-Value="@LoginInput.RememberMe">@L["RememberMe"]</Checkbox>
+                </div>
+            </FormItem>
+
+            <FormItem>
+                <Button Type="@ButtonType.Primary"
+                        HtmlType="submit"
+                        Loading="@IsLoading"
+                        Block
+                        Size="@ButtonSize.Large">
+                    @L["Login"]
+                </Button>
+            </FormItem>
+        </Form>
+    </Card>
+</div>
+
+@code {
+    private RenderFragment prefixUserIcon =@<Icon Type="user" />;
+    private RenderFragment prefixPasswordIcon =@<Icon Type="lock" />;
+    
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "returnUrl")]
+    public string? ReturnUrl { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "returnUrlHash")]
+    public string? ReturnUrlHash { get; set; }
+    
+    [Inject]
+    protected IBlazorLoginService LoginService { get; set; } = default!;
+
+    protected LoginInputModel LoginInput { get; set; } = new();
+    protected bool IsLoading { get; set; }
+    protected string? ErrorMessage { get; set; }
+
+    public Login()
+    {
+        LocalizationResource = typeof(AccountResource);
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        ReturnUrl = NormalizeReturnUrl(ReturnUrl);
+    }
+
+    protected virtual async Task OnLoginAsync()
+    {
+        try
+        {
+            IsLoading = true;
+            ErrorMessage = null;
+            await InvokeAsync(StateHasChanged);
+
+            if (string.IsNullOrWhiteSpace(LoginInput.UserNameOrEmailAddress) ||
+                string.IsNullOrWhiteSpace(LoginInput.Password))
+            {
+                ErrorMessage = L["ThisFieldIsRequired"];
+                return;
+            }
+
+            var result = await LoginService.LoginAsync(
+                LoginInput.UserNameOrEmailAddress,
+                LoginInput.Password,
+                LoginInput.RememberMe
+            );
+
+            if (result.Success)
+            {
+                var targetUrl = GetReturnUrl();
+                Navigation.NavigateTo(targetUrl, forceLoad: true);
+            }
+            else
+            {
+                ErrorMessage = result.ErrorMessage ?? L["InvalidUserNameOrPassword"];
+            }
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = L["InvalidUserNameOrPassword"];
+            Logger.LogException(ex);
+        }
+        finally
+        {
+            IsLoading = false;
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    protected virtual string GetReturnUrl()
+    {
+        if (!string.IsNullOrWhiteSpace(ReturnUrl))
+        {
+            var url = ReturnUrl;
+            if (!string.IsNullOrWhiteSpace(ReturnUrlHash))
+            {
+                url += "#" + ReturnUrlHash;
+            }
+            return url;
+        }
+        return "/";
+    }
+
+    protected virtual string NormalizeReturnUrl(string? returnUrl)
+    {
+        if (string.IsNullOrWhiteSpace(returnUrl))
+        {
+            return "/";
+        }
+
+        if (!Uri.TryCreate(returnUrl, UriKind.RelativeOrAbsolute, out var uri))
+        {
+            return "/";
+        }
+
+        if (uri.IsAbsoluteUri)
+        {
+            return "/";
+        }
+
+        return returnUrl;
+    }
+}
+
+<style>
+    .login-card {
+        width: 100%;
+    }
+    
+    .login-header {
+        text-align: center;
+        margin-bottom: 32px;
+    }
+    
+    .login-logo {
+        margin-bottom: 16px;
+    }
+    
+    .login-logo img {
+        height: 48px;
+    }
+    
+    .login-options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .login-footer {
+        text-align: center;
+        margin-top: 16px;
+    }
+</style>

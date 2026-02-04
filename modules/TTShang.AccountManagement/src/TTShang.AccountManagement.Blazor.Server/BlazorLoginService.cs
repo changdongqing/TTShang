@@ -48,7 +48,7 @@ public class BlazorLoginService : IBlazorLoginService, ITransientDependency
 
             if (user == null)
             {
-                Logger.LogWarning("User not found: {UserNameOrEmail}", userNameOrEmailAddress);
+                Logger.LogDebug("User login failed - invalid credentials");
                 return BlazorLoginResult.Failed(Localizer["InvalidUserNameOrPassword"]);
             }
 
